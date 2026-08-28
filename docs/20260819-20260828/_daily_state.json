@@ -1,0 +1,441 @@
+{
+  "date": "20260819-20260828",
+  "date_label": "2026-08-19 ~ 2026-08-28",
+  "generated_at": "2026-08-28 01:46:06 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.18399v1",
+      "route": "20260819-20260828/2608.18399v1-what-does-attention-transfer-transfer-attention-structure-and-robustness-in-vision-transformers",
+      "title": "What Does Attention Transfer Transfer? Attention Structure and Robustness in Vision Transformers",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "cv"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "视觉Transformer注意力迁移与鲁棒性",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.18734v1",
+      "route": "20260819-20260828/2608.18734v1-cl4d-contrastive-language-4d-pretraining-for-vision-language-reasoning-in-dynamic-scenes",
+      "title": "CL4D: Contrastive Language-4D Pretraining for Vision-Language Reasoning in Dynamic Scenes",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "cv"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "对比语言-4D预训练用于动态场景视觉语言推理",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.21252v1",
+      "route": "20260819-20260828/2608.21252v1-ensi-rag-entity-structure-indexed-retrieval-augmented-generation-for-long-document-question-answering",
+      "title": "EnSI-RAG: Entity-Structure-Indexed Retrieval-Augmented Generation for Long-Document Question Answering",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ai"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向长文档问答的实体结构索引检索增强生成",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.21454v1",
+      "route": "20260819-20260828/2608.21454v1-multi-scale-fruit-capsules-dilated-convolutions-and-dynamic-routing-for-in-the-wild-explainable-fruit-recognition",
+      "title": "Multi-Scale Fruit Capsules: Dilated Convolutions and Dynamic Routing for In-the-Wild Explainable Fruit Recognition",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "cv"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于膨胀卷积的动态路由胶囊网络用于可解释水果图像分类",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.21702v1",
+      "route": "20260819-20260828/2608.21702v1-from-association-to-causation-improving-retrieval-precision-of-retrieval-augmented-generation-via-causal-relations-and-an-attention-mechanism",
+      "title": "From Association to Causation: Improving Retrieval Precision of Retrieval-Augmented Generation via Causal Relations and an Attention Mechanism",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ai"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "改进RAG检索精度的因果关系与注意力方法",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.22368v1",
+      "route": "20260819-20260828/2608.22368v1-did-it-in-87-minutes-a-label-free-softmax-to-linear-adaptation-of-vision-transformers-for-object-detection",
+      "title": "DiD It in 87 Minutes: A Label-Free Softmax-to-Linear Adaptation of Vision Transformers for Object Detection",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "cv"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "视觉Transformer的无标签Softmax到线性注意力适配用于目标检测",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.22665v1",
+      "route": "20260819-20260828/2608.22665v1-hyperbolic-hierarchical-clustering-for-visual-representation-learning",
+      "title": "Hyperbolic Hierarchical Clustering for Visual Representation Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "cv"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于双曲层次聚类的视觉Transformer新型token混合器",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.22885v1",
+      "route": "20260819-20260828/2608.22885v1-dragent-discriminative-reasoning-agent-for-referring-expression-segmentation",
+      "title": "DRAgent: Discriminative Reasoning Agent for Referring Expression Segmentation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "cv"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "多模态大模型驱动的判别式推理用于指称表达分割",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.22996v1",
+      "route": "20260819-20260828/2608.22996v1-encore-entropy-guided-cropping-and-attention-regularization-for-robust-vision--language-understanding",
+      "title": "ENCORE: Entropy-Guided Cropping and Attention Regularization for Robust Vision--Language Understanding",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ai"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于熵引导裁剪与注意力正则化的鲁棒视觉语言理解",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.23283v2",
+      "route": "20260819-20260828/2608.23283v2-apodex-11-scaling-agentic-intelligence-for-complex-work",
+      "title": "Apodex 1.1: Scaling Agentic Intelligence for Complex Work",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ai"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向复杂工作的智能体规划、委派与工具使用",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.24214v1",
+      "route": "20260819-20260828/2608.24214v1-metarag-belief-action-aligned-policy-optimization-for-agentic-rag",
+      "title": "MetaRAG: Belief-Action Aligned Policy Optimization for Agentic RAG",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ai"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于信念-行为对齐的智能体RAG策略优化",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.24439v1",
+      "route": "20260819-20260828/2608.24439v1-doubleseval-diagnosing-multi-agent-tactical-reasoning-in-vision-language-models-via-professional-doubles-badminton",
+      "title": "DoublesEval: Diagnosing Multi-Agent Tactical Reasoning in Vision-Language Models via Professional Doubles Badminton",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ai"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "对视觉语言模型多智能体战术推理能力的诊断评估",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.25485v1",
+      "route": "20260819-20260828/2608.25485v1-semi-supervised-adaptation-of-vision-language-models-for-image-classification",
+      "title": "Semi-Supervised Adaptation of Vision-Language Models for Image Classification",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "cv"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "将CLIP视觉语言模型半监督适配到卫星图像分类",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.25575v1",
+      "route": "20260819-20260828/2608.25575v1-mllmclip-feature-level-distillation-of-mllm-for-robust-vision-language-representations",
+      "title": "MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "hsi-zsl"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "通过多模态大模型特征级蒸馏提升视觉语言模型的零样本识别表示",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.18410v1",
+      "route": "20260819-20260828/2608.18410v1-role-conditioned-sub-token-routing-for-efficient-vision-language-action-policies",
+      "title": "Role-Conditioned Sub-Token Routing for Efficient Vision-Language-Action Policies",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ai"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向多模态智能体感知与动作的高效视觉-语言-动作模型",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.18671v1",
+      "route": "20260819-20260828/2608.18671v1-vision-language-models-for-egocentric-video-from-hand-object-interaction-to-embodied-ai",
+      "title": "Vision-Language Models for Egocentric Video: From Hand-Object Interaction to Embodied AI",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ai"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向自我中心视频理解与具身AI的视觉语言模型综述",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.18709v1",
+      "route": "20260819-20260828/2608.18709v1-a-critical-synthesis-of-uncertainty-quantification-and-foundation-models-for-semantic-segmentation",
+      "title": "A Critical Synthesis of Uncertainty Quantification and Foundation Models for Semantic Segmentation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "cv"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向语义分割的基础模型与不确定性量化",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.18907v1",
+      "route": "20260819-20260828/2608.18907v1-learning-state-aware-dynamic-generative-data-augmentation-on-small-scale-datasets",
+      "title": "Learning-State-Aware Dynamic Generative Data Augmentation on Small-Scale Datasets",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "cv"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向小样本图像分类的学习状态感知动态生成式数据增强",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.18996v1",
+      "route": "20260819-20260828/2608.18996v1-grabvg-graph-attentive-binding-for-visual-grounding-in-uav-imagery",
+      "title": "GrabVG: Graph-Attentive Binding for Visual Grounding in UAV Imagery",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ai"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向视觉语言理解与推理的无人机视觉定位",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.18523v1",
+      "route": "20260819-20260828/2608.18523v1-prior-conditioned-gaussian-discriminants-for-generalizable-ai-generated-image-detection",
+      "title": "Prior-Conditioned Gaussian Discriminants for Generalizable AI-generated Image Detection",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "cv"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "利用冻结深度特征和高斯判别头进行生成图像分类",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.18694v1",
+      "route": "20260819-20260828/2608.18694v1-composed-historical-image-retrieval-by-modeling-temporal-representations",
+      "title": "Composed Historical Image Retrieval by Modeling Temporal Representations",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "cv"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向图像检索的视觉特征表示学习",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.18979v1",
+      "route": "20260819-20260828/2608.18979v1-when-simplicity-wins-bottleneck-aware-context-modeling-for-lightweight-semantic-segmentation",
+      "title": "When Simplicity Wins: Bottleneck-Aware Context Modeling for Lightweight Semantic Segmentation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "cv"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向轻量级语义分割的CNN-Transformer混合瓶颈感知上下文建模",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.19285v1",
+      "route": "20260819-20260828/2608.19285v1-clustering-and-token-denoising-for-faster-and-more-robust-vlms",
+      "title": "Clustering and Token Denoising for Faster and More Robust VLMs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ai"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向视觉语言模型的免训练标记剪枝，提升速度与鲁棒性",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.18938v1",
+      "route": "20260819-20260828/2608.18938v1-breaking-the-weakest-link-to-evade-vision-language-models",
+      "title": "Breaking the weakest link to evade vision language models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ai"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "研究视觉语言模型的对抗鲁棒性",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.20122v1",
+      "route": "20260819-20260828/2608.20122v1-armorocr-grounded-adversarial-visual-perception-via-observation-transferred-self-distillation",
+      "title": "ArmorOCR: Grounded Adversarial Visual Perception via Observation-Transferred Self-Distillation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ai"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "大型多模态模型的接地对抗OCR",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.20868v1",
+      "route": "20260819-20260828/2608.20868v1-identify-locate-link-end-to-end-key-value-extraction-from-document-images",
+      "title": "Identify, Locate, Link: End-to-End Key-Value Extraction from Document Images",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ai"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "紧凑VLM端到端键值抽取",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    },
+    {
+      "paper_id": "2608.21142v1",
+      "route": "20260819-20260828/2608.21142v1-coec-calibrated-orthogonal-equivalence-compensation-for-structured-pruning-of-large-language-models",
+      "title": "COEC: Calibrated Orthogonal-Equivalence Compensation for Structured Pruning of Large Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ai"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "大语言模型的结构化剪枝训练无关补偿",
+      "first_seen_at": "2026-08-28 01:46:06 UTC",
+      "updated_at": "2026-08-28 01:46:06 UTC"
+    }
+  ]
+}

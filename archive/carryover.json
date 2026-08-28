@@ -1,6 +1,110 @@
 {
-  "generated_at": "2026-03-06T19:11:18.471356+00:00",
-  "updated_date": "20260306",
+  "generated_at": "2026-08-28T01:27:17.359595+00:00",
+  "updated_date": "20260819-20260828",
   "carryover_days": 9,
-  "items": []
+  "tag_states": {
+    "CV": {
+      "updated_date": "20260819-20260828",
+      "carryover_days": 9,
+      "items": []
+    },
+    "AI": {
+      "updated_date": "20260819-20260828",
+      "carryover_days": 9,
+      "items": []
+    },
+    "hsi-zsl": {
+      "updated_date": "20260819-20260828",
+      "carryover_days": 9,
+      "items": [
+        {
+          "id": "2608.21487v1",
+          "source": "arxiv",
+          "title": "TASSO: TAsk-Specific Subspace Optimization for Continual Learning of Vision-Language Models",
+          "abstract": "Vision-Language Models (VLMs) exhibit strong zero-shot capabilities, making them an attractive solution for continual learning across diverse tasks. However, during continual adaptation, both catastrophic forgetting and zero-shot degradation occur, severely degrading performance. In this paper, we introduce TASSO, a new paradigm that efficiently preserves the latent space geometry while ensuring network plasticity. We achieve this with two complementary techniques: subspace learning and geometry-aware knowledge distillation. Specifically, we first learn a sequence of task-specific low-rank projectors, which we use to project the latent representations before optimizing cross-entropy. Secondly, we employ a geodesic-distance-based loss that distills knowledge from the previous-task model while effectively preserving the latent space geometry. These design choices not only avoid unnecessary parameter updates along the full embedding dimensions but also improve learning by focusing on task-specific manifolds. Moreover, the geometry-aware distillation provides strong regularization and significantly reduces both catastrophic forgetting and zero-shot degradation throughout the continual learning sequence. Experimental results with the CLIP vision language model in the multi-domain task incremental and class incremental learning benchmarks demonstrate clear improvements over state-of-the-art methods in mitigating forgetting and preserving zero-shot capabilities.",
+          "authors": [
+            "Chang Sun",
+            "Francesco Barbato",
+            "Matteo Caligiuri",
+            "Pietro Zanuttigh"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "published": "2026-08-21T12:18:14+00:00",
+          "link": "https://arxiv.org/pdf/2608.21487v1",
+          "tags": [
+            "keyword:AI",
+            "keyword:CV",
+            "keyword:hsi-zsl",
+            "query:AI",
+            "query:CV",
+            "query:hsi-zsl"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "continual learning for vision-language models preserving latent space and zero-shot capability",
+          "llm_evidence_cn": "面向视觉语言模型持续学习与零样本保持的方法",
+          "llm_evidence": "面向视觉语言模型持续学习与零样本保持的方法",
+          "canonical_evidence": "面向视觉语言模型持续学习与零样本保持的方法",
+          "llm_tldr_en": "Introduces TASSO, a paradigm that learns task-specific low-rank projectors and uses geodesic-distance-based knowledge distillation to preserve latent space geometry and plasticity during continual learning of VLMs.",
+          "llm_tldr_cn": "针对视觉语言模型在持续学习中的灾难性遗忘与零样本能力退化问题，提出TASSO新范式。它通过任务特定低秩投影器进行子空间学习，并采用基于测地距离的几何感知知识蒸馏保持潜在空间几何。两者结合在保持网络可塑性的同时缓解遗忘与零样本退化。实验表明TASSO在多样持续学习任务上有效。为VLM持续适应提供了高效方案。",
+          "llm_tldr": "针对视觉语言模型在持续学习中的灾难性遗忘与零样本能力退化问题，提出TASSO新范式。它通过任务特定低秩投影器进行子空间学习，并采用基于测地距离的几何感知知识蒸馏保持潜在空间几何。两者结合在保持网络可塑性的同时缓解遗忘与零样本退化。实验表明TASSO在多样持续学习任务上有效。为VLM持续适应提供了高效方案。",
+          "llm_tags": [
+            "query:hsi-zsl"
+          ],
+          "matched_query_tag": "query:hsi-zsl",
+          "matched_query_text": "vision language model for zero-shot recognition",
+          "matched_requirement_id": "req-24",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.21487v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.19871v1",
+          "source": "arxiv",
+          "title": "DIFFCZSL: Compositional Zero-Shot Learning Regularized by Diffusion Representations",
+          "abstract": "Compositional Zero-Shot Learning (CZSL) aims to recognize unseen attribute-object compositions by leveraging knowledge of primitive concepts learned from seen compositions. Although recent works achieve impressive performance in CZSL by leveraging large vision-language models, they primarily rely on discriminative representations that may not explicitly preserve the structured relationships between primitive concepts and their compositions. Motivated by the recent success of diffusion-based classifiers and their competitive performance relative to discriminative models, we investigate whether intermediate diffusion representations can provide complementary cues for CZSL. To this end, we propose DIFFCZSL, a diffusion-augmented framework that injects generative priors from pre-trained diffusion models into CLIP-based CZSL pipelines. We extract intermediate diffusion representations and project them into the CLIP embedding space to provide auxiliary supervision on both image and text modalities. Through contrastive alignment between CLIP embeddings and diffusion features during training, our method encourages the embedding geometry toward richer composition-aware semantics, while introducing no additional cost at inference time. Extensive experiments on three public CZSL benchmarks demonstrate consistent improvements over strong CLIP-based baselines under both closed-world and open-world settings. Our results highlight the complementary strengths of generative diffusion representations and discriminative vision-language models for compositional generalization.",
+          "authors": [
+            "Hangyu Tian",
+            "Zhenqi He",
+            "Yanghao Wang",
+            "Long Chen"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV"
+          ],
+          "published": "2026-08-20T10:30:18+00:00",
+          "link": "https://arxiv.org/pdf/2608.19871v1",
+          "tags": [
+            "keyword:AI",
+            "keyword:CV",
+            "keyword:hsi-zsl",
+            "query:AI",
+            "query:CV",
+            "query:hsi-zsl"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Compositional zero-shot learning with large vision-language models and diffusion representations",
+          "llm_evidence_cn": "基于大视觉语言模型与扩散表示的零样本识别",
+          "llm_evidence": "基于大视觉语言模型与扩散表示的零样本识别",
+          "canonical_evidence": "基于大视觉语言模型与扩散表示的零样本识别",
+          "llm_tldr_en": "DIFFCZSL uses diffusion intermediate representations as complementary cues for compositional zero-shot learning, regularizing VLM features to preserve structured relationships between primitives and compositions and improve unseen attribute-object recognition.",
+          "llm_tldr_cn": "组合零样本学习需要识别未见过的属性-物体组合，现有方法依赖大视觉语言模型的判别式特征，难以显式保持基元与组合间的结构关系。本文提出DIFFCZSL，将扩散模型的中间表示作为互补线索并施加正则化，以增强组合表示。实验表明扩散表示能够补充判别式表示，在组合零样本识别上取得显著改进。该工作为结合生成式与判别式表示提供了新思路。",
+          "llm_tldr": "组合零样本学习需要识别未见过的属性-物体组合，现有方法依赖大视觉语言模型的判别式特征，难以显式保持基元与组合间的结构关系。本文提出DIFFCZSL，将扩散模型的中间表示作为互补线索并施加正则化，以增强组合表示。实验表明扩散表示能够补充判别式表示，在组合零样本识别上取得显著改进。该工作为结合生成式与判别式表示提供了新思路。",
+          "llm_tags": [
+            "query:hsi-zsl"
+          ],
+          "matched_query_tag": "query:hsi-zsl",
+          "matched_query_text": "vision language model for zero-shot recognition",
+          "matched_requirement_id": "req-24",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.19871v1",
+          "carry_days": 1
+        }
+      ]
+    }
+  }
 }

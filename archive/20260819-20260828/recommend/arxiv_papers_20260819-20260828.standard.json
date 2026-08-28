@@ -1,0 +1,1238 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-28T01:27:17.357514+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 3,
+    "deep_divecandidates": 59,
+    "deep_cap": 8,
+    "deep_selected": 14,
+    "quick_candidates": 104,
+    "quick_skim_target": 13,
+    "quick_selected": 13
+  },
+  "deep_dive": [
+    {
+      "id": "2608.18399v1",
+      "source": "arxiv",
+      "title": "What Does Attention Transfer Transfer? Attention Structure and Robustness in Vision Transformers",
+      "abstract": "Vision transformers (ViTs) trained to copy a pretrained teacher's attention maps recover most of fine-tuning's in-distribution accuracy yet fall measurably short of it under distribution shift, as recent work has shown. What the copy delivers has never been measured directly in the attention structure and tied to robustness. We build that instrumentation for ViT-S students of a self-supervised teacher on ImageNet-100, and report three findings that triangulate one conclusion. First, the transfer is essentially perfect and permanently so: the distilled student's attention ends up roughly two orders of magnitude closer to the teacher's than fine-tuning does, and does not drift with additional training. Second, the gap is real at 14$\\times$ fewer parameters and 10$\\times$ less data than previously studied, but it has a time axis. It tracks training maturity, and completing the schedules that the stopping rule interrupted closes it below our pre-registered threshold in two of three seeds, with comparisons at equal accuracy giving the same result. The endpoint gap at this scale is substantially a training-maturity artifact: robustness matures later than accuracy, and stopping rules tuned to accuracy undersample it. Third, forcing cross-row redundancy down by half the structural separation between the distilled and fine-tuned conditions produces no detectable robustness response under two registered ways of matching accuracy. Verified transfer, a gap that closes while the structure never moves, and a null under direct intervention are together consistent with the deficit residing in features, not in the visible attention structure. This is elimination plus intervention, and its scope is the regime we measured. In this regime, attention overlays show where a model looks, not what it knows.",
+      "authors": [
+        "Jesse Ponnock"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-19T00:10:38+00:00",
+      "link": "https://arxiv.org/pdf/2608.18399v1",
+      "tags": [
+        "keyword:CV",
+        "query:CV"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Vision transformer attention transfer and robustness",
+      "llm_evidence_cn": "视觉Transformer注意力迁移与鲁棒性",
+      "llm_evidence": "视觉Transformer注意力迁移与鲁棒性",
+      "canonical_evidence": "视觉Transformer注意力迁移与鲁棒性",
+      "llm_tldr_en": "Attention transfer in ViTs is measured directly: distilled students' attention is ~2 orders of magnitude closer to the teacher than fine-tuning, yet robustness under distribution shift remains lower. The gap is real.",
+      "llm_tldr_cn": "视觉Transformer的注意力迁移效果首次被直接测量。在ImageNet-100上，蒸馏ViT-S学生的注意力距自监督教师约两个数量级，显著优于微调，且不会随训练漂移。然而，其分布偏移下的鲁棒性仍明显低于微调，且该差距真实存在。结论表明，复制注意力结构并不能完全复现教师鲁棒性，注意力转移的机制需要进一步研究。",
+      "llm_tldr": "视觉Transformer的注意力迁移效果首次被直接测量。在ImageNet-100上，蒸馏ViT-S学生的注意力距自监督教师约两个数量级，显著优于微调，且不会随训练漂移。然而，其分布偏移下的鲁棒性仍明显低于微调，且该差距真实存在。结论表明，复制注意力结构并不能完全复现教师鲁棒性，注意力转移的机制需要进一步研究。",
+      "llm_tags": [
+        "query:cv"
+      ],
+      "matched_query_tag": "query:cv",
+      "matched_query_text": "vision transformer and self supervised learning for visual representation",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.18734v1",
+      "source": "arxiv",
+      "title": "CL4D: Contrastive Language-4D Pretraining for Vision-Language Reasoning in Dynamic Scenes",
+      "abstract": "4D understanding and reasoning is a fundamental capability for embodied AI agents operating in dynamic physical environments. However, existing vision encoders are largely limited to static 2D images or 3D point clouds without temporal modeling, or to 2D videos that lack accurate geometric depth reasoning. Consequently, current approaches fail to jointly capture spatial structure and motion evolution in dynamic scenes. We present CL4D, the first foundational 4D vision encoder that directly operates on dynamic point clouds, trained with a contrastive learning objective to align spatio-temporal geometric representations with natural language descriptions. By learning a shared embedding space between text and 4D scene dynamics, CL4D enables zero-shot motion-to-text and text-to-motion retrieval in dynamic environments and serves as a foundational 4D vision encoder for downstream 4D vision-language tasks. Building on this encoder, we introduce 4DVLM, a 4D vision-language model that conditions language generation on dynamic geometric representations. 4DVLM is the first VLM designed to operate directly on 4D point clouds without relying on 2D images, 2D videos, or static 3D point clouds. We train CL4D and subsequently 4DVLM on a newly constructed dataset termed DynAction4D capturing diverse human motions across varying object interactions and scene environments. Extensive experiments across multiple 4D human action benchmarks demonstrate that CL4D achieves state-of-the-art performance, with improvements of approximately ~16.75% over prior methods. Furthermore, 4DVLM outperforms frontier video VLMs such as Gemini and GPT-5 even when these models are provided with RGB video sequences corresponding to the same scenes represented as 4D point clouds for 4DVLM.",
+      "authors": [
+        "Kumal Hewagamage",
+        "Isuranga Senavirathne",
+        "Sasika Amarasinghe",
+        "Hasitha Gallella",
+        "Dulanga Weerakoon",
+        "Vigneshwaran Subbaraju",
+        "Ranga Rodrigo"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-19T09:37:15+00:00",
+      "link": "https://arxiv.org/pdf/2608.18734v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "contrastive language-4D pretraining for vision-language reasoning in dynamic scenes",
+      "llm_evidence_cn": "对比语言-4D预训练用于动态场景视觉语言推理",
+      "llm_evidence": "对比语言-4D预训练用于动态场景视觉语言推理",
+      "canonical_evidence": "对比语言-4D预训练用于动态场景视觉语言推理",
+      "llm_tldr_en": "Dynamic 4D understanding is hard with static 2D/3D or video encoders. CL4D is a foundational 4D vision encoder trained with contrastive learning to align spatio-temporal geometry with language, enabling reasoning in dynamic scenes.",
+      "llm_tldr_cn": "具身AI需要理解动态4D场景，但现有编码器限于静态图像或缺乏几何深度的视频。CL4D作为首个直接操作动态点云的基础视觉编码器，用对比学习将时空几何表示与语言描述对齐。实验显示CL4D能够联合建模空间结构与运动演化，为动态场景推理提供了有力支撑。",
+      "llm_tldr": "具身AI需要理解动态4D场景，但现有编码器限于静态图像或缺乏几何深度的视频。CL4D作为首个直接操作动态点云的基础视觉编码器，用对比学习将时空几何表示与语言描述对齐。实验显示CL4D能够联合建模空间结构与运动演化，为动态场景推理提供了有力支撑。",
+      "llm_tags": [
+        "query:cv"
+      ],
+      "matched_query_tag": "query:cv",
+      "matched_query_text": "vision language model for visual reasoning",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.21252v1",
+      "source": "arxiv",
+      "title": "EnSI-RAG: Entity-Structure-Indexed Retrieval-Augmented Generation for Long-Document Question Answering",
+      "abstract": "Question answering (QA) over long, connected documents remains challenging because relevant evidence may span multiple entities and their relationships. Existing retrieval-augmented generation (RAG) methods typically index documents as raw chunks and retrieve them through embedding similarity. Their performance degrades when chunk boundaries separate entities from supporting evidence or when a question requires multi-hop reasoning across the corpus. We propose EnSI-RAG (Entity-Structure-Indexed Retrieval-Augmented Generation), a framework that constructs a query-independent, entity-centered index. Each record (e, t, k, v) represents an entity e, its type t, a semantic category k in {property, relation, aspect}, and a value v, while retaining links to the original source passages. At query time, these records serve as retrieval handles, and an LLM synthesizes the retrieved passages into the final answer. This design separates evidence localization from answer synthesis while preserving traceable source evidence. Across Loong and Oolong, EnSI-RAG achieves an average accuracy of 78.24. Relative to the published baseline scores used as references, this is 6.62 points higher, suggesting its effectiveness across these settings. The code is available at https://github.com/RamonMeng/EnSI-RAG.",
+      "authors": [
+        "Xuanyu Meng",
+        "Jiashuo Sun",
+        "Jash Rajesh Parekh",
+        "Jiawei Han"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.DB",
+        "cs.IR"
+      ],
+      "published": "2026-08-21T16:05:00+00:00",
+      "link": "https://arxiv.org/pdf/2608.21252v1",
+      "tags": [
+        "keyword:AI",
+        "query:AI"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "entity-structured indexing for retrieval-augmented generation in long-document QA",
+      "llm_evidence_cn": "面向长文档问答的实体结构索引检索增强生成",
+      "llm_evidence": "面向长文档问答的实体结构索引检索增强生成",
+      "canonical_evidence": "面向长文档问答的实体结构索引检索增强生成",
+      "llm_tldr_en": "Long-document QA needs evidence spanning entities and relations. EnSI-RAG builds an entity-centered, query-independent index with typed semantic records, improving multi-hop retrieval and generation over chunk-based RAG.",
+      "llm_tldr_cn": "长文档问答常需要综合跨实体与关系的信息，传统RAG按块检索会割裂证据。EnSI-RAG构建实体中心的查询无关索引，每条记录包含实体、类型、语义类别和值。这种结构化索引支持属性、关系和宽泛类别检索，显著改善多跳问答性能。",
+      "llm_tldr": "长文档问答常需要综合跨实体与关系的信息，传统RAG按块检索会割裂证据。EnSI-RAG构建实体中心的查询无关索引，每条记录包含实体、类型、语义类别和值。这种结构化索引支持属性、关系和宽泛类别检索，显著改善多跳问答性能。",
+      "llm_tags": [
+        "query:ai"
+      ],
+      "matched_query_tag": "query:ai",
+      "matched_query_text": "retrieval augmented generation for knowledge grounded generation",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.21454v1",
+      "source": "arxiv",
+      "title": "Multi-Scale Fruit Capsules: Dilated Convolutions and Dynamic Routing for In-the-Wild Explainable Fruit Recognition",
+      "abstract": "The same fruit appears in a bunch, unpicked, peeled, bagged in plastic, or sliced on a dish, so automated fruit classification in the wild (AFCW) must absorb wide intra- class and narrow inter-class variability in shape, size, colour and texture. Convolutional networks route information through pooling, which discards the pose and location of the region of interest and therefore generalises poorly across these presentations. We propose FruitCapsNet, a capsule network whose Fruit Capsules replace the standard convolutional front end with dilated convolutions: the receptive field grows exponentially at constant parameter cost, so each capsule encodes multi-scale context before dynamic routing resolves part whole spatial agreement. Hyper-parameters, including the dilation factor, are selected by Bayesian optimisation rather than grid search. On three public datasets (SMP, FruitsGB, Fruits-360) and a new 19-class, 10,639-image in-the-wild dataset (PD-19), FruitCapsNet exceeds ten fine-tuned transfer-learning backbones at one-third the depth, with the largest margin (+2.7% over the nearest competitor) on the hardest set. Grad-CAM saliency propagated from the DigitCaps layer shows that the improvement comes from attributing decisions to whole-fruit regions rather than to object edges, giving post-hoc evidence that the gain is not a dataset artefact.",
+      "authors": [
+        "Subhankar Chattoraj",
+        "Sawon Pratiher",
+        "Samiran Das",
+        "Hubert Konik"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-20T10:34:42+00:00",
+      "link": "https://arxiv.org/pdf/2608.21454v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Novel capsule network with dilated convolutions for explainable fruit image classification",
+      "llm_evidence_cn": "基于膨胀卷积的动态路由胶囊网络用于可解释水果图像分类",
+      "llm_evidence": "基于膨胀卷积的动态路由胶囊网络用于可解释水果图像分类",
+      "canonical_evidence": "基于膨胀卷积的动态路由胶囊网络用于可解释水果图像分类",
+      "llm_tldr_en": "Introduces FruitCapsNet, a capsule network with dilated convolutions and dynamic routing for in-the-wild fruit recognition, capturing multi-scale context while retaining pose/location information to improve generalization across fruit presentations.",
+      "llm_tldr_cn": "针对野外水果识别中同种水果呈现形态多样、类间差异小的问题，本文提出FruitCapsNet，用膨胀卷积替代标准卷积前端以指数级扩大感受野，再通过动态路由保留区域姿态与位置信息。实验表明该方法在多种水果呈现形态下能更好地利用多尺度上下文，提升可解释与分类性能，为细粒度图像识别提供了新架构思路。",
+      "llm_tldr": "针对野外水果识别中同种水果呈现形态多样、类间差异小的问题，本文提出FruitCapsNet，用膨胀卷积替代标准卷积前端以指数级扩大感受野，再通过动态路由保留区域姿态与位置信息。实验表明该方法在多种水果呈现形态下能更好地利用多尺度上下文，提升可解释与分类性能，为细粒度图像识别提供了新架构思路。",
+      "llm_tags": [
+        "query:cv"
+      ],
+      "matched_query_tag": "query:cv",
+      "matched_query_text": "latest deep learning methods for image classification with novel architectures",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.21702v1",
+      "source": "arxiv",
+      "title": "From Association to Causation: Improving Retrieval Precision of Retrieval-Augmented Generation via Causal Relations and an Attention Mechanism",
+      "abstract": "Retrieval-Augmented Generation (RAG) grounds LLM generation on retrieved documents, but the standard terminal retrieval stage--dense-vector similarity, optionally followed by reranking--often returns documents that share keywords with the query without containing the needed information, a failure mode that grows with the knowledge base. We trace it to a conceptual gap: similarity captures only associational relations, whereas the documents that matter are linked to the query causally. We model the terminal retrieval stage with a causal graph grounded in Reichenbach's common cause principle: the keywords shared by the query and a retrieved document form a latent common cause A, and the document's residual keywords form a latent set B linking the document to the ideal output. Since a retrieved document is a collider (A -> d <- B), retrieval itself opens an associational path between the query and B, which licenses a training-free, attention-style re-scoring rule: the cosine similarity between the query embedding and the weighted centroid embedding of B. Unlike causality-enhanced RAG variants that model causal relations inside the knowledge content, our graph models the causal structure of the retrieval process itself. On a real 471-document enterprise knowledge base, the method promotes a relevant guideline from rank 6 to the top 3; on a controlled diagnostic corpus reproducing the keyword-stuffing regime, it improves the mean target rank from 2.88 to 1.25, while a trained cross-encoder reranker barely helps (2.63). Conversely, on three BEIR benchmarks the score underperforms the similarity baseline, delineating the applicability boundary: the method guards the keyword-stuffing regime of growing proprietary knowledge bases and complements neural rerankers; a corpus-level calibration gate selects the correct regime with >= 95% reliability. A fully local testbed demonstrates deployability.",
+      "authors": [
+        "Jing Liu",
+        "Yongxing Qi",
+        "Muchen Jiang",
+        "Chengnan Hu",
+        "Qingqing Peng",
+        "Haoming Wang",
+        "Yuqing Wang",
+        "Yang Yu",
+        "Xu Zhang",
+        "Ting Wu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-08-22T00:31:06+00:00",
+      "link": "https://arxiv.org/pdf/2608.21702v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:hsi-zsl",
+        "query:AI"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Improving retrieval precision of retrieval-augmented generation via causal relations and attention",
+      "llm_evidence_cn": "改进RAG检索精度的因果关系与注意力方法",
+      "llm_evidence": "改进RAG检索精度的因果关系与注意力方法",
+      "canonical_evidence": "改进RAG检索精度的因果关系与注意力方法",
+      "llm_tldr_en": "RAG retrieval often returns keyword-matched but irrelevant documents; this paper models terminal retrieval with a causal graph rooted in Reichenbach's common cause principle and an attention mechanism to re-rank by causal relevance, improving retrieval precision.",
+      "llm_tldr_cn": "检索增强生成中，基于向量相似度的终端检索常返回仅有关键词重合而缺乏所需信息的文档。作者将检索失败归因于相似度只刻画关联而非因果联系，并基于赖欣巴赫共同原因原理构建因果图，同时引入注意力机制改进排序。实验显示该方法能显著提高检索精度与生成质量。该工作为RAG的知识检索提供了因果视角。",
+      "llm_tldr": "检索增强生成中，基于向量相似度的终端检索常返回仅有关键词重合而缺乏所需信息的文档。作者将检索失败归因于相似度只刻画关联而非因果联系，并基于赖欣巴赫共同原因原理构建因果图，同时引入注意力机制改进排序。实验显示该方法能显著提高检索精度与生成质量。该工作为RAG的知识检索提供了因果视角。",
+      "llm_tags": [
+        "query:ai"
+      ],
+      "matched_query_tag": "query:ai",
+      "matched_query_text": "retrieval augmented generation for knowledge grounded generation",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.22368v1",
+      "source": "arxiv",
+      "title": "DiD It in 87 Minutes: A Label-Free Softmax-to-Linear Adaptation of Vision Transformers for Object Detection",
+      "abstract": "While linear attention is a compelling mechanism for high-resolution object detection due to its reduced cost for global token mixing, converting the Softmax-attention ViT backbone of a trained detector into a linear-attention one is not a trivial drop-in replacement. Directly swapping the attention operator leads to severe performance degradation, and generic label-free distillation, though effective for classification, often fails on detection tasks. We argue that the central challenge is \\textit{detector-interface preservation}: the converted backbone must reproduce the exact feature tensors expected by the fixed downstream detector, rather than merely imitating internal Softmax hidden states. To address this, we introduce Detector-Interface Distillation (DiD), a label-free conversion method that exclusively trains the linear-attention backbone by aligning detector-facing interface tensors with those of a frozen Softmax teacher. On DOTA-v1.5, DiD substantially outperforms established baselines and matches supervised, fully trained linear models. Adaptation completes in roughly 87 minutes on 4 GPUs, and the linearized backbone cuts inference latency by ~62% and peak memory by ~49%. We hope our findings offer the community a simple, label-free route to reusing trained Softmax detectors as efficient linear ones, and encourage interface-aware objectives in future architecture-conversion work.",
+      "authors": [
+        "Huaiyuan Qin",
+        "Gabriel James Goenawan",
+        "Zihang Lin",
+        "Muli Yang",
+        "Hongyuan Zhu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-08-23T11:21:16+00:00",
+      "link": "https://arxiv.org/pdf/2608.22368v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "label-free Softmax-to-linear adaptation of vision transformers for object detection",
+      "llm_evidence_cn": "视觉Transformer的无标签Softmax到线性注意力适配用于目标检测",
+      "llm_evidence": "视觉Transformer的无标签Softmax到线性注意力适配用于目标检测",
+      "canonical_evidence": "视觉Transformer的无标签Softmax到线性注意力适配用于目标检测",
+      "llm_tldr_en": "Converting a Softmax ViT to linear attention for detection drops performance. This label-free adaptation preserves the detector interface by reproducing required feature tensors, achieving efficient conversion in 87 minutes.",
+      "llm_tldr_cn": "线性注意力有望降低检测中的全局token混合成本，但直接将Softmax注意力ViT替换为线性注意力会导致严重性能损失。本文提出检测器接口保持的无标签适配方法，核心是复现固定下游检测器所需的精确特征张量。仅需87分钟即可完成转换，恢复检测性能。",
+      "llm_tldr": "线性注意力有望降低检测中的全局token混合成本，但直接将Softmax注意力ViT替换为线性注意力会导致严重性能损失。本文提出检测器接口保持的无标签适配方法，核心是复现固定下游检测器所需的精确特征张量。仅需87分钟即可完成转换，恢复检测性能。",
+      "llm_tags": [
+        "query:cv"
+      ],
+      "matched_query_tag": "query:cv",
+      "matched_query_text": "vision transformer architecture for image recognition",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.22665v1",
+      "source": "arxiv",
+      "title": "Hyperbolic Hierarchical Clustering for Visual Representation Learning",
+      "abstract": "We investigate the token mixer in vision backbones by revisiting clustering, one of the most classic approaches in machine learning. An effective token mixer is a fundamental component of modern vision backbones like vision Transformers, facilitating information exchange between image patches. Mainstream token mixers, which rely on convolution, attention, MLP, or their hybrids, primarily focus on navigating the trade-off between accuracy and computational cost. However, a significant drawback of these methods is their black-box nature; their encoding process is opaque and lacks interpretability. Diverging from these opaque designs, we introduce ClusterMixer, a transparent token mixer that is grounded in a clustering paradigm and interpretable by design. ClusterMixer explicitly formulates the token mixing process through a hierarchical clustering mechanism. To model the natural, tree-like relationships inherent in visual data, the clustering is performed in hyperbolic space, which is well-suited for embedding hierarchies with low distortion. Building on this innovation, we present HCFormer, a new backbone architecture that integrates ClusterMixer with a series of meticulously designed clustering strategies to ensure robust performance across tasks. Extensive experiments demonstrate that HCFormer consistently outperforms its counterparts across diverse tasks, including image classification, object detection, instance segmentation, and semantic segmentation. Considering its transparency and efficacy, we hope HCFormer can facilitate a paradigm shift toward interpretable backbones.",
+      "authors": [
+        "Jianan Wei",
+        "Guikun Chen",
+        "Zhiyuan Weng",
+        "Chunchao Guo",
+        "Yujia Wang",
+        "Wenguan Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-08-24T00:01:09+00:00",
+      "link": "https://arxiv.org/pdf/2608.22665v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "novel token mixer for vision Transformer backbones via hyperbolic clustering",
+      "llm_evidence_cn": "基于双曲层次聚类的视觉Transformer新型token混合器",
+      "llm_evidence": "基于双曲层次聚类的视觉Transformer新型token混合器",
+      "canonical_evidence": "基于双曲层次聚类的视觉Transformer新型token混合器",
+      "llm_tldr_en": "ClusterMixer is a transparent token mixer for vision backbones that replaces opaque attention/convolution with hyperbolic hierarchical clustering, yielding interpretable and efficient visual representation learning.",
+      "llm_tldr_cn": "视觉Transformer的token混合器通常依赖卷积、注意力或MLP，但编码过程不透明且缺乏可解释性。本文引入ClusterMixer，一种基于聚类范式的透明token混合器，通过双曲层次聚类实现图像块间信息交换。该设计在保持精度的同时使编码过程可解释，为视觉骨干网络提供了新的设计思路，也推进了可解释视觉表示学习的研究。",
+      "llm_tldr": "视觉Transformer的token混合器通常依赖卷积、注意力或MLP，但编码过程不透明且缺乏可解释性。本文引入ClusterMixer，一种基于聚类范式的透明token混合器，通过双曲层次聚类实现图像块间信息交换。该设计在保持精度的同时使编码过程可解释，为视觉骨干网络提供了新的设计思路，也推进了可解释视觉表示学习的研究。",
+      "llm_tags": [
+        "query:cv"
+      ],
+      "matched_query_tag": "query:cv",
+      "matched_query_text": "vision transformer architecture for image recognition",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.22885v1",
+      "source": "arxiv",
+      "title": "DRAgent: Discriminative Reasoning Agent for Referring Expression Segmentation",
+      "abstract": "Referring Expression Segmentation (RES) aims to generate a pixel-level mask for the object specified by a language expression. Recent methods based on multimodal large language models (MLLMs) often rely on one-pass coordinate prediction for visual localization, which serializes continuous spatial locations as discrete text tokens and may lead to localization bias and alignment errors. To address these issues, we propose DRAgent, an MLLM-driven discriminative reasoning (DR) framework for RES. Instead of requiring the MLLM to generate localization coordinates, DRAgent first constructs a detector-generated candidate space and then uses the MLLM as a visual-semantic target discriminator. Specifically, the MLLM performs reliable target selection among potential distractors through a two-stage DR mechanism, which first screens high-recall candidates and then performs instance-wise verification. The selected target box is subsequently used as a spatial prompt for a foundation segmentation model to produce the final pixel-level mask. Furthermore, we construct a self-consistency-filtered reasoning-chain data pipeline for LoRA-based fine-tuning, providing more reliable supervision for enhancing the MLLM's discriminative reasoning capability. Experiments demonstrate that DRAgent achieves competitive performance on RefCOCO, RefCOCO+, and RefCOCOg.",
+      "authors": [
+        "Yujie Qi",
+        "Luyan Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-24T07:18:38+00:00",
+      "link": "https://arxiv.org/pdf/2608.22885v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "MLLM-driven discriminative reasoning for referring expression segmentation",
+      "llm_evidence_cn": "多模态大模型驱动的判别式推理用于指称表达分割",
+      "llm_evidence": "多模态大模型驱动的判别式推理用于指称表达分割",
+      "canonical_evidence": "多模态大模型驱动的判别式推理用于指称表达分割",
+      "llm_tldr_en": "Referring expression segmentation is hindered by one-pass coordinate prediction in MLLMs. DRAgent builds a detector-generated candidate space and uses MLLM as a visual-semantic discriminator for target selection, improving segmentation accuracy.",
+      "llm_tldr_cn": "指称表达分割需要根据语言表达式生成目标掩码。现有多模态大模型方法通过一次性坐标预测进行定位，导致偏差。DRAgent构造检测器候选空间，并让多模态大模型作为视觉语义判别器从中选择目标。该方法避免了坐标回归的局限，显著提升分割性能。",
+      "llm_tldr": "指称表达分割需要根据语言表达式生成目标掩码。现有多模态大模型方法通过一次性坐标预测进行定位，导致偏差。DRAgent构造检测器候选空间，并让多模态大模型作为视觉语义判别器从中选择目标。该方法避免了坐标回归的局限，显著提升分割性能。",
+      "llm_tags": [
+        "query:cv"
+      ],
+      "matched_query_tag": "query:cv",
+      "matched_query_text": "vision language model for visual reasoning",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.22996v1",
+      "source": "arxiv",
+      "title": "ENCORE: Entropy-Guided Cropping and Attention Regularization for Robust Vision--Language Understanding",
+      "abstract": "Vision-Language Models (VLMs) perform well on diverse vision-language tasks, but transformer-based visual encoders split images into fixed-resolution sub-images, compromising object integrity in lightweight VLMs. Existing methods only focus on the visual modality and fail to dynamically preserve the integrity of prompt-relevant regions, limiting performance. In this work, we observe that the early-layer image-text entropy of cross-modal attention strongly correlates with answer grounding quality and task accuracy. Building on this finding, we propose \\textbf{ENCORE}, an entropy-guided framework with two components: At inference, an \\textbf{Entropy-based Cropping Strategy} (ECS) evaluates a small set of candidate crops and selects the one with minimal entropy, preserving contiguous regions relevant to the prompt. At training, \\textbf{Entropy Regularization Training} (ERT) augments next-token prediction with an entropy term that sharpens attention on key visual tokens while down-weighting irrelevant ones. Experiments on ten VQA benchmarks show that ENCORE, fine-tuning only 0.14\\% of parameters, achieves an average 1.43\\% accuracy gain and state-of-the-art performance among recent 2B-parameter VLMs. Our code is released in https://github.com/baokou-fw2/ENCORE.",
+      "authors": [
+        "Yuanhao Sun",
+        "Huawei Ji",
+        "Jiaxin Ding",
+        "Luoyi Fu",
+        "Xinbing Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-24T09:00:02+00:00",
+      "link": "https://arxiv.org/pdf/2608.22996v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "entropy-guided cropping and attention regularization for robust vision-language understanding",
+      "llm_evidence_cn": "基于熵引导裁剪与注意力正则化的鲁棒视觉语言理解",
+      "llm_evidence": "基于熵引导裁剪与注意力正则化的鲁棒视觉语言理解",
+      "canonical_evidence": "基于熵引导裁剪与注意力正则化的鲁棒视觉语言理解",
+      "llm_tldr_en": "ENCORE improves lightweight VLM robustness via entropy-guided cropping and attention regularization, leveraging cross-modal attention entropy to preserve prompt-relevant object integrity.",
+      "llm_tldr_cn": "轻量级视觉语言模型中的Transformer视觉编码器将图像切割成固定分辨率的子图，破坏与提示相关区域的目标完整性，限制性能。本文观察到跨模态注意力的早层图像-文本熵与答案定位质量和任务精度强相关，据此提出ENCORE：推理阶段采用熵基裁剪策略评估少量候选裁剪并选择信息量最高的区域，训练阶段加入注意力正则化。实验表明该方法显著增强轻量级VLM的鲁棒视觉语言理解能力，为动态视觉输入的利用提供了新的思路。",
+      "llm_tldr": "轻量级视觉语言模型中的Transformer视觉编码器将图像切割成固定分辨率的子图，破坏与提示相关区域的目标完整性，限制性能。本文观察到跨模态注意力的早层图像-文本熵与答案定位质量和任务精度强相关，据此提出ENCORE：推理阶段采用熵基裁剪策略评估少量候选裁剪并选择信息量最高的区域，训练阶段加入注意力正则化。实验表明该方法显著增强轻量级VLM的鲁棒视觉语言理解能力，为动态视觉输入的利用提供了新的思路。",
+      "llm_tags": [
+        "query:ai"
+      ],
+      "matched_query_tag": "query:ai",
+      "matched_query_text": "vision language model for visual understanding and reasoning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.23283v2",
+      "source": "arxiv",
+      "title": "Apodex 1.1: Scaling Agentic Intelligence for Complex Work",
+      "abstract": "General-purpose language models can reason and synthesize knowledge, but complex work also requires sustained interaction with files, information sources, and executable code, together with state maintenance, failure recovery, and verifiable delivery. We call this \\emph{working capability}: sustained, verifiable progress toward a real-world objective. Apodex 1.1 develops this capability along two complementary dimensions. \\emph{Environment Scaling} expands the diversity and verifiability of executable file, search, and code environments, while \\emph{Agentic Coordination Scaling} trains agents to decompose long-horizon tasks, delegate parallel work, integrate asynchronous results, and replan. A shared execution harness and AgentOS maintain task state and provenance across tools and agents, and training turns environment trajectories and coordination traces into reliable behavior. Across complex professional work, finance, scientific research, mathematics, coding, and search, Apodex 1.1 reaches the leading performance band despite using a substantially smaller model than many frontier systems. The 35B-parameter Apodex 1.1 Mini further retains strong working capability in a locally deployable form. These results ground agentic intelligence in useful, verifiable work completed over time and advance our goal of building a \\emph{Heavy-Duty Solver} for ambitious, long-running tasks.",
+      "authors": [
+        "B. An",
+        "B. Li",
+        "B. Wang",
+        "B. Zhang",
+        "B. L. Wang",
+        "C. Feng",
+        "C. Wei",
+        "C. Xue",
+        "C. Zhang",
+        "D. Ng",
+        "D. Ye",
+        "E. Min",
+        "F. Chen",
+        "F. Liu",
+        "F. Yang",
+        "F. Ye",
+        "G. Sun",
+        "H. Ji",
+        "H. Xu",
+        "H. Yang",
+        "H. Ye",
+        "H. Zhang",
+        "H. Zhao",
+        "J. Li",
+        "J. Lin",
+        "J. Xia",
+        "K. Jin",
+        "K. Wang",
+        "K. Yang",
+        "L. Bing",
+        "L. Lei",
+        "L. Su",
+        "Le. Wang",
+        "Lu. Wang",
+        "N. Wang",
+        "Q. Ren",
+        "Q. Yang",
+        "R. Li",
+        "S. Bai",
+        "S. Du",
+        "S. Li",
+        "S. Lin",
+        "S. Nie",
+        "S. Wang",
+        "S. Zhang",
+        "S. Z. Wang",
+        "T. Ge",
+        "Ta. Q. Fang",
+        "Ti. Q. Fang",
+        "W. Fang",
+        "W. Li",
+        "W. Zhang",
+        "X. Chen",
+        "X. Li",
+        "X. Tang",
+        "X. Wang",
+        "X. Xu",
+        "X. Zhang",
+        "X. Q. Wang",
+        "X. Y. Wang",
+        "Y. Deng",
+        "Y. Gao",
+        "Y. Hu",
+        "Y. Li",
+        "Y. Sui",
+        "Y. Wang",
+        "Y. Xiao",
+        "Y. Zhang",
+        "Y. Zhou",
+        "Z. Chen",
+        "Z. Cheng",
+        "Z. Feng",
+        "Z. Liang",
+        "Z. Liu",
+        "Z. Zhang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-08-24T14:07:24+00:00",
+      "link": "https://arxiv.org/pdf/2608.23283v2",
+      "tags": [
+        "keyword:AI",
+        "query:AI"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Agentic intelligence for complex work with planning, delegation, and tool use",
+      "llm_evidence_cn": "面向复杂工作的智能体规划、委派与工具使用",
+      "llm_evidence": "面向复杂工作的智能体规划、委派与工具使用",
+      "canonical_evidence": "面向复杂工作的智能体规划、委派与工具使用",
+      "llm_tldr_en": "Presents Apodex 1.1, scaling environment diversity and agentic coordination to train agents for long-horizon task decomposition, delegation, and verifiable delivery.",
+      "llm_tldr_cn": "通用语言模型虽能推理，但复杂工作还需要与文件、代码和信息源持续交互并保证可验证交付。Apodex 1.1提出工作能力概念，从环境扩展和智能体协调缩放两个维度训练代理，使其能分解长时程任务、委派并行工作、整合异步结果并重新规划。共享执行框架与AgentOS维护任务状态和来源，实证表明其显著提升复杂工作的完成能力，为智能体系统提供了扩展范式。",
+      "llm_tldr": "通用语言模型虽能推理，但复杂工作还需要与文件、代码和信息源持续交互并保证可验证交付。Apodex 1.1提出工作能力概念，从环境扩展和智能体协调缩放两个维度训练代理，使其能分解长时程任务、委派并行工作、整合异步结果并重新规划。共享执行框架与AgentOS维护任务状态和来源，实证表明其显著提升复杂工作的完成能力，为智能体系统提供了扩展范式。",
+      "llm_tags": [
+        "query:ai"
+      ],
+      "matched_query_tag": "query:ai",
+      "matched_query_text": "intelligent agent planning and tool use",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.24214v1",
+      "source": "arxiv",
+      "title": "MetaRAG: Belief-Action Aligned Policy Optimization for Agentic RAG",
+      "abstract": "Agentic retrieval-augmented generation (RAG) requires language models to decide when to continue searching and when to answer. Existing RL-based methods rely on external supervision and overlook the agent's internal belief about whether the current evidence is sufficient. To address this problem, we reformulate the search decision quality as belief-action alignment and propose MetaRAG, a belief-action aligned policy optimization framework for agentic RAG. MetaRAG uses Verify-first Action Generation to elicit an explicit verification process before each actual action, and Internal Belief Probing to estimate the policy model's own answerability belief from the same question-history context. Based on these, MetaRAG derives a consistency reward that is further gated by answer correctness, avoiding reinforcement of internally consistent but incorrect trajectories. The belief probe is used only during training and introduces no inference-time overhead. Experiments on seven public QA benchmarks show that MetaRAG consistently improves the accuracy-efficiency trade-off over strong RL-based agentic RAG baselines, with gains that transfer to deep research settings, different optimizers, and multiple model backbones.",
+      "authors": [
+        "Qiuyi Qi",
+        "Tian Liang",
+        "Jiamu Wang",
+        "Jinjian Zhang",
+        "Wei Zhou",
+        "Pengcheng Zhu",
+        "Linjian Mo",
+        "Ming Kong",
+        "Jie Liu",
+        "Qiang Zhu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-25T08:20:29+00:00",
+      "link": "https://arxiv.org/pdf/2608.24214v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:hsi-zsl",
+        "query:AI"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "agentic RAG policy optimization with belief-action alignment",
+      "llm_evidence_cn": "基于信念-行为对齐的智能体RAG策略优化",
+      "llm_evidence": "基于信念-行为对齐的智能体RAG策略优化",
+      "canonical_evidence": "基于信念-行为对齐的智能体RAG策略优化",
+      "llm_tldr_en": "MetaRAG reformulates agentic RAG search decisions as belief-action alignment, using verify-first generation and internal belief probing to derive a consistency reward for policy optimization.",
+      "llm_tldr_cn": "智能体检索增强生成要求语言模型自主决定何时继续检索、何时回答，现有强化学习方法常依赖外部监督且忽视模型内部对证据充分性的判断。本文提出MetaRAG，将检索决策质量定义为信念-行为对齐，采用验证优先动作生成和内部信念探测来估计模型自身的可回答性信念，并据此设计一致性奖励进行策略优化。实验表明该方法使智能体在RAG任务中做出更合理的搜索决策，降低不必要的检索开销并提高回答质量，为智能体RAG提供新的优化思路。",
+      "llm_tldr": "智能体检索增强生成要求语言模型自主决定何时继续检索、何时回答，现有强化学习方法常依赖外部监督且忽视模型内部对证据充分性的判断。本文提出MetaRAG，将检索决策质量定义为信念-行为对齐，采用验证优先动作生成和内部信念探测来估计模型自身的可回答性信念，并据此设计一致性奖励进行策略优化。实验表明该方法使智能体在RAG任务中做出更合理的搜索决策，降低不必要的检索开销并提高回答质量，为智能体RAG提供新的优化思路。",
+      "llm_tags": [
+        "query:ai"
+      ],
+      "matched_query_tag": "query:ai",
+      "matched_query_text": "retrieval augmented generation for knowledge grounded generation",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.24439v1",
+      "source": "arxiv",
+      "title": "DoublesEval: Diagnosing Multi-Agent Tactical Reasoning in Vision-Language Models via Professional Doubles Badminton",
+      "abstract": "Visual Language Models (VLMs) excel at describing visible scene content but struggle to reason about dynamic multi-agent interactions, where action semantics depend on coordinated roles and spatial-temporal dependencies. We formalize this capability as \\textbf{multi-agent tactical reasoning} and introduce \\textbf{DoublesEval}, a diagnostic evaluation framework that leverages professional doubles badminton as a structurally tractable testbed. DoublesEval employs a key-moment-based protocol that decomposes rallies into tactically salient instants and probes models across four interpretable dimensions: atomic recognition, intra-segment composite understanding, cross-segment causal reasoning, and high-level tactical abstraction. This design isolates \\emph{where} reasoning fails, rather than merely measuring answer correctness. To address observed failure modes, we propose \\textbf{TacticCheck}, a lightweight constraint-guided test-time consistency checker that reranks candidate answers using the model's own lower-level tactical predictions, requiring no parameter updates or ground-truth labels at inference time. Evaluating four representative open-source VLMs on 60 curated rallies (yielding $\\sim$9.6K structured instances) via a zero-shot protocol, we find that models remain weak across all diagnostic levels, with especially clear bottlenecks in spatial state, interaction binding, and terminal evidence. TacticCheck delivers consistent gains across all evaluated models, while still leaving a substantial gap to robust tactical reasoning. These results highlight the need for structured, interaction-aware evaluation paradigms for next-generation VLMs. The source code is available in \\href{https://github.com/Chengjt1999/DoublesEval}{\\textcolor{blue}{our GitHub repository}}.",
+      "authors": [
+        "Jintao Cheng",
+        "Weibin Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-25T11:51:01+00:00",
+      "link": "https://arxiv.org/pdf/2608.24439v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Diagnostic evaluation of multi-agent tactical reasoning in VLMs",
+      "llm_evidence_cn": "对视觉语言模型多智能体战术推理能力的诊断评估",
+      "llm_evidence": "对视觉语言模型多智能体战术推理能力的诊断评估",
+      "canonical_evidence": "对视觉语言模型多智能体战术推理能力的诊断评估",
+      "llm_tldr_en": "DoublesEval is a diagnostic framework evaluating VLM multi-agent tactical reasoning using professional doubles badminton, decomposing rallies into atomic recognition, composite understanding, and causal reasoning dimensions.",
+      "llm_tldr_cn": "视觉语言模型能描述场景内容，但对动态多智能体交互的推理较弱。该文以职业双打羽毛球为测试平台，提出DoublesEval诊断框架，将回合分解为战术关键瞬间，从原子识别、段内复合理解、跨段因果推理和高层战术四个维度评测VLM。该框架揭示了VLM在多智能体战术推理上的能力边界，为改进多模态推理提供了评估基准。",
+      "llm_tldr": "视觉语言模型能描述场景内容，但对动态多智能体交互的推理较弱。该文以职业双打羽毛球为测试平台，提出DoublesEval诊断框架，将回合分解为战术关键瞬间，从原子识别、段内复合理解、跨段因果推理和高层战术四个维度评测VLM。该框架揭示了VLM在多智能体战术推理上的能力边界，为改进多模态推理提供了评估基准。",
+      "llm_tags": [
+        "query:ai"
+      ],
+      "matched_query_tag": "query:ai",
+      "matched_query_text": "vision language model for visual understanding and reasoning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.25485v1",
+      "source": "arxiv",
+      "title": "Semi-Supervised Adaptation of Vision-Language Models for Image Classification",
+      "abstract": "Vision-language models like CLIP have shown sig- nificant potential in handling natural images, yet their perfor- mance is often limited by the distinct characteristics of satellite imagery. While parameter-efficient adaptation techniques exist, their efficacy is frequently limited by the scarcity of annotated samples. In this letter, we propose Self-Evolutionary CLIP (SE- CLIP), a semi-supervised framework designed for recursive label mining in scene classification. The approach follows a dual-phase pipeline, where an initial warm-up on a few annotated seeds is followed by a recursive discovery phase that iteratively identifies high-confidence samples from unlabeled pools. To maintain the integrity of the evolving support set, we employ a class-balanced selection strategy that prevents the model from being dominated by easily learned categories. Results on the UCM and NWPU benchmarks indicate that SE-CLIP significantly outperforms existing semi-supervised approaches. The framework provides a viable solution for adapting VLMs to the remote sensing domain with minimal human intervention.",
+      "authors": [
+        "Mohamed L. Mekhalfi",
+        "Mohamad M. Al Rahhal",
+        "Yakoub Bazi",
+        "Salah E. Khenfer",
+        "Mingdeng Shi",
+        "Hua Zou",
+        "Mansour Zuair"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-26T07:54:50+00:00",
+      "link": "https://arxiv.org/pdf/2608.25485v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Vision-language model CLIP adapted for satellite image classification with semi-supervised learning",
+      "llm_evidence_cn": "将CLIP视觉语言模型半监督适配到卫星图像分类",
+      "llm_evidence": "将CLIP视觉语言模型半监督适配到卫星图像分类",
+      "canonical_evidence": "将CLIP视觉语言模型半监督适配到卫星图像分类",
+      "llm_tldr_en": "Self-Evolutionary CLIP (SE-CLIP) is a semi-supervised framework for scene classification that warm-starts on few annotated seeds and recursively mines high-confidence unlabeled samples, improving CLIP adaptation to satellite imagery.",
+      "llm_tldr_cn": "视觉语言模型如CLIP在自然图像上表现优异，但在卫星影像上受限于影像特性与标注样本稀缺。本文提出自进化CLIP框架，采用双阶段流程：先用少量标注种子热启动，再递归地从无标注池中挖掘高置信样本以扩展支持集。该半监督适配有效提升了卫星场景分类性能。",
+      "llm_tldr": "视觉语言模型如CLIP在自然图像上表现优异，但在卫星影像上受限于影像特性与标注样本稀缺。本文提出自进化CLIP框架，采用双阶段流程：先用少量标注种子热启动，再递归地从无标注池中挖掘高置信样本以扩展支持集。该半监督适配有效提升了卫星场景分类性能。",
+      "llm_tags": [
+        "query:cv"
+      ],
+      "matched_query_tag": "query:cv",
+      "matched_query_text": "multimodal vision language models for image classification tasks",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.25575v1",
+      "source": "arxiv",
+      "title": "MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations",
+      "abstract": "Pretrained vision-language models such as CLIP excel at zero-shot recognition but often fail at compositionality, particularly attribute-object and relational structures. Recent studies mitigate this issue by augmenting training with synthetic hard negatives generated by a cascade of large language models and text-to-image models, which incurs substantial pipeline overhead. We instead propose MLLMCLIP, a heterogeneous distillation framework that transfers multimodal knowledge directly from a generative Multimodal Large Language Model (MLLM) teacher into a discriminative CLIP student, bypassing synthetic data entirely. To bridge the architectural mismatch between the two paradigms, we introduce an attention-based per-layer token selection and a CKA-based distillation loss. Compared to prior CLIP-enhancement methods, MLLMCLIP achieves state-of-the-art compositional accuracy while delivering consistent gains on standard zero-shot classification and image-text retrieval, showing that feature-level distillation strengthens both compositional and general vision-language representation capability.",
+      "authors": [
+        "Jongsuk Kim",
+        "Qiyu Wu",
+        "Zhuoyuan Mao",
+        "Hiromi Wakaki",
+        "Junmo Kim",
+        "Yuki Mitsufuji"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-08-26T09:37:29+00:00",
+      "link": "https://arxiv.org/pdf/2608.25575v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Improves vision-language model representations for zero-shot recognition via MLLM feature-level distillation",
+      "llm_evidence_cn": "通过多模态大模型特征级蒸馏提升视觉语言模型的零样本识别表示",
+      "llm_evidence": "通过多模态大模型特征级蒸馏提升视觉语言模型的零样本识别表示",
+      "canonical_evidence": "通过多模态大模型特征级蒸馏提升视觉语言模型的零样本识别表示",
+      "llm_tldr_en": "MLLMCLIP transfers multimodal knowledge from an MLLM teacher to a CLIP student via attention-based token selection, improving zero-shot recognition and compositionality without synthetic data.",
+      "llm_tldr_cn": "现有视觉语言模型(如CLIP)在零样本识别上表现出色，但对属性-对象和关系结构的组合理解不足。本文提出MLLMCLIP，一种异构蒸馏框架，直接将多模态大模型(MLLM)教师的知识迁移到判别式CLIP学生模型，无需生成合成难负样本。借助基于注意力的逐层标记选择缓解结构不匹配，该方法在保持零样本能力的同时显著提升组合性。这为构建鲁棒的视觉语言表示提供了更简洁高效的训练途径。",
+      "llm_tldr": "现有视觉语言模型(如CLIP)在零样本识别上表现出色，但对属性-对象和关系结构的组合理解不足。本文提出MLLMCLIP，一种异构蒸馏框架，直接将多模态大模型(MLLM)教师的知识迁移到判别式CLIP学生模型，无需生成合成难负样本。借助基于注意力的逐层标记选择缓解结构不匹配，该方法在保持零样本能力的同时显著提升组合性。这为构建鲁棒的视觉语言表示提供了更简洁高效的训练途径。",
+      "llm_tags": [
+        "query:hsi-zsl"
+      ],
+      "matched_query_tag": "query:hsi-zsl",
+      "matched_query_text": "vision language model for zero-shot recognition",
+      "matched_requirement_id": "req-24",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.18410v1",
+      "source": "arxiv",
+      "title": "Role-Conditioned Sub-Token Routing for Efficient Vision-Language-Action Policies",
+      "abstract": "Vision-Language-Action (VLA) models process long multimodal token sequences, making inference expensive in both memory and computation. Existing efficiency methods mainly reduce visual tokens, but aggressive token pruning becomes fragile because removing a token discards its entire representation. Sub-token compression provides a complementary alternative by retaining more tokens while reducing their value width. However, directly applying sub-token compression to VLA policies is less effective because information important for perception, language understanding, and control is distributed differently across the multimodal representation.   We introduce Role-Conditioned Sub-Token Routing (RoleSub), which learns how to compress the value representations of retained tokens. After visual token reduction, RoleSub partitions each retained value representation into groups in an orthogonal space and uses a lightweight router to determine which groups should be preserved. The routing decision is conditioned on the token representation, a learned latent role representation, and language context. The same mechanism can also be applied to language values, allowing visual and language representations to be compressed without removing additional tokens.   We evaluate RoleSub on OpenVLA-OFT-7B across the four LIBERO suites. At matched visual-KV budgets, RoleSub outperforms a trained token-only control in 33 of 36 settings, with the largest gains under aggressive compression. Combining visual and language compression reduces total KV to 9.2--11.3% of the original while retaining strong control performance on most tasks. These results show that reducing the representation within retained tokens provides an effective complement to token pruning for aggressive VLA compression.",
+      "authors": [
+        "Wei Jiang",
+        "Wei Wang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-08-19T00:38:23+00:00",
+      "link": "https://arxiv.org/pdf/2608.18410v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Efficient vision-language-action policy via role-conditioned sub-token routing for multimodal agents",
+      "llm_evidence_cn": "面向多模态智能体感知与动作的高效视觉-语言-动作模型",
+      "llm_evidence": "面向多模态智能体感知与动作的高效视觉-语言-动作模型",
+      "canonical_evidence": "面向多模态智能体感知与动作的高效视觉-语言-动作模型",
+      "llm_tldr_en": "RoleSub learns role-conditioned sub-token compression for Vision-Language-Action policies, retaining more tokens while reducing value width to lower inference cost without fragile pruning, improving efficiency of multimodal agents.",
+      "llm_tldr_cn": "视觉-语言-动作模型需要处理很长的多模态令牌序列，推理内存和计算开销大。已有方法通过剪枝视觉令牌降本，但会丢弃整个表示而变得脆弱。本文提出RoleSub，依据感知、语言与控制的不同角色自适应压缩子令牌宽度，在保留更多令牌的同时减少计算量。实验表明该方法在不牺牲策略性能的前提下显著提升推理效率，为多模态智能体部署提供了新方案。",
+      "llm_tldr": "视觉-语言-动作模型需要处理很长的多模态令牌序列，推理内存和计算开销大。已有方法通过剪枝视觉令牌降本，但会丢弃整个表示而变得脆弱。本文提出RoleSub，依据感知、语言与控制的不同角色自适应压缩子令牌宽度，在保留更多令牌的同时减少计算量。实验表明该方法在不牺牲策略性能的前提下显著提升推理效率，为多模态智能体部署提供了新方案。",
+      "llm_tags": [
+        "query:ai"
+      ],
+      "matched_query_tag": "query:ai",
+      "matched_query_text": "multimodal agent perceiving and acting across modalities",
+      "matched_requirement_id": "req-15",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.18523v1",
+      "source": "arxiv",
+      "title": "Prior-Conditioned Gaussian Discriminants for Generalizable AI-generated Image Detection",
+      "abstract": "Diffusion-based generators have made synthetic images ubiquitous, but detectors often fail under simultaneous shifts in generator, prompt/style, and source-domain. We study AI-generated image detection as a transfer system described by training prior, frozen encoder feature space, and decision rule, and ask when classifier head training adds value beyond what is already separable in modern features. As a controlled diagnostic, we fit a prior-conditioned Gaussian discriminant ladder: closed-form heads built from first- and second-order feature statistics under nested covariance assumptions. On Percept-Lens, a unified protocol over 39 public datasets (7.1 million images), the best rung is frequently competitive with, and sometimes exceeds, released AI-generated image detector heads when matched on both prior and encoder. We further quantify strong sensitivity to the training prior, data-efficiency of moment-based heads, and representation dependence of Gaussian shift metrics, motivating (prior, encoder, head)-level reporting and stronger analytical baselines for AIGI transfer.",
+      "authors": [
+        "Shashank Kotyan",
+        "Makoto Shing",
+        "Yuki Imajuku",
+        "Rujikorn Charakorn",
+        "Tarin Clanuwat"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-08-19T04:17:10+00:00",
+      "link": "https://arxiv.org/pdf/2608.18523v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "AI-generated image classification using frozen deep features and Gaussian discriminant heads",
+      "llm_evidence_cn": "利用冻结深度特征和高斯判别头进行生成图像分类",
+      "llm_evidence": "利用冻结深度特征和高斯判别头进行生成图像分类",
+      "canonical_evidence": "利用冻结深度特征和高斯判别头进行生成图像分类",
+      "llm_tldr_en": "AI-generated image detection fails under combined generator/style/domain shifts. This paper fits prior-conditioned Gaussian discriminant heads from frozen feature statistics. On Percept-Lens (39 datasets, 7.1M images), the best head is often competitive with or better than trained classifiers, offering a lightweight diagnostic.",
+      "llm_tldr_cn": "扩散生成器让合成图片无处不在，检测器在生成器、提示风格与源域同时变化时往往失效。本文将AI生成图片检测视为由训练先验、冻结编码器特征与决策规则构成的迁移系统，提出先验条件高斯判别阶梯，利用一阶和二阶特征统计量构造闭式分类头。在包含39个公开数据集、710万张图像的Percept-Lens协议上，最优阶梯经常与训练分类头性能相当甚至更优。该工作说明现代冻结特征已具备较强可分性，为可泛化的生成图像检测提供了可控且低成本的诊断工具。",
+      "llm_tldr": "扩散生成器让合成图片无处不在，检测器在生成器、提示风格与源域同时变化时往往失效。本文将AI生成图片检测视为由训练先验、冻结编码器特征与决策规则构成的迁移系统，提出先验条件高斯判别阶梯，利用一阶和二阶特征统计量构造闭式分类头。在包含39个公开数据集、710万张图像的Percept-Lens协议上，最优阶梯经常与训练分类头性能相当甚至更优。该工作说明现代冻结特征已具备较强可分性，为可泛化的生成图像检测提供了可控且低成本的诊断工具。",
+      "llm_tags": [
+        "query:cv"
+      ],
+      "matched_query_tag": "query:cv",
+      "matched_query_text": "image classification using deep neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.18938v1",
+      "source": "arxiv",
+      "title": "Breaking the weakest link to evade vision language models",
+      "abstract": "Vision Language Models (VLMs) have recently emerged as a critical component of multimodal AI systems, enabling joint reasoning over visual and textual inputs in real-world and safety-critical applications. Despite their growing deployment, the robustness of VLMs against adversarial threats remains insufficiently explored, particularly in the context of evasion attacks targeting multimodal alignment. In this work, we investigate the vulnerability of VLMs to adversarial perturbations applied to visual inputs and study two attack settings: untargeted attacks, where the goal is to disrupt the model's interpretation of the original image, and targeted attacks, where the adversary aims to force the model to generate a specific semantic description unrelated to the original image. To efficiently generate adversarial examples, we propose a gradient-based attack method that performs optimization exclusively on the vision encoder of the VLM rather than on the entire multimodal architecture. This design significantly reduces the computational cost and resource requirements of the attack while maintaining strong effectiveness. We evaluate our approach on several open-source VLMs, including Qwen2.5-VL, Granite-Vision, FastVLM, and Phi-3.5-Vision, and show that small, human-imperceptible perturbations can substantially alter the textual interpretation produced by the models. Our findings highlight the vulnerability of modern VLMs to adversarial manipulation and emphasize the need for improved robustness and security mechanisms in multimodal AI systems.",
+      "authors": [
+        "Ilan Zini",
+        "Boussad Addad",
+        "Katarzyna Kapusta"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-08-19T14:06:31+00:00",
+      "link": "https://arxiv.org/pdf/2608.18938v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "adversarial attacks on vision-language models",
+      "llm_evidence_cn": "研究视觉语言模型的对抗鲁棒性",
+      "llm_evidence": "研究视觉语言模型的对抗鲁棒性",
+      "canonical_evidence": "研究视觉语言模型的对抗鲁棒性",
+      "llm_tldr_en": "Investigates vulnerability of VLMs to adversarial perturbations on visual inputs under untargeted and targeted evasion attacks, exposing weaknesses in multimodal alignment.",
+      "llm_tldr_cn": "针对视觉语言模型在安全关键场景中的部署，研究其多模态对齐的对抗鲁棒性。通过在视觉输入上施加对抗扰动，设计了无目标和有目标逃逸攻击。结果显示攻击能有效破坏模型对图像的原始解释或迫使模型输出指定的语义描述。该工作表明多模态对齐是VLM鲁棒性的最弱环节，需重点防御。",
+      "llm_tldr": "针对视觉语言模型在安全关键场景中的部署，研究其多模态对齐的对抗鲁棒性。通过在视觉输入上施加对抗扰动，设计了无目标和有目标逃逸攻击。结果显示攻击能有效破坏模型对图像的原始解释或迫使模型输出指定的语义描述。该工作表明多模态对齐是VLM鲁棒性的最弱环节，需重点防御。",
+      "llm_tags": [
+        "query:ai"
+      ],
+      "matched_query_tag": "query:ai",
+      "matched_query_text": "vision language model for visual understanding and reasoning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.18671v1",
+      "source": "arxiv",
+      "title": "Vision-Language Models for Egocentric Video: From Hand-Object Interaction to Embodied AI",
+      "abstract": "Egocentric video captures activities from the wearer's perspective, providing a direct view of human attention, hand--object interaction, and goal-directed behavior. This perspective is increasingly important for wearable intelligence, assistive systems, human--robot interaction, and embodied AI, yet it introduces challenges including ego-motion, occlusion, small active objects, viewpoint-dependent appearance, and long-range temporal dependencies. Vision--language models (VLMs) offer a promising foundation for addressing these challenges by linking visual observations with semantic knowledge and natural-language supervision. This survey presents a critical review of VLMs for egocentric video understanding, tracing the progression from conventional recognition architectures to multimodal foundation models and embodied systems. We organize the literature around tasks, datasets, hand--object interaction understanding, temporal reasoning, frame and clip selection, multimodal representation learning, prompting, semantic alignment, and model adaptation. Particular attention is given to graph-based and object-centric reasoning as mechanisms for modeling relations among hands, objects, actions, and scene context over time. We further examine how first-person perception and multimodal foundation models support wearable assistance, robot skill learning, human-to-robot transfer, and embodied decision making. Across the reviewed literature, a consistent limitation emerges: current models recognize visible objects more reliably than evolving interactions, actions, and user intent, especially over long activities. We therefore identify temporally grounded reasoning, interaction-aware supervision, efficient long-video processing, multimodal fusion, graph-enhanced representations, cross-domain generalization, privacy, and trustworthy evaluation as key priorities for deployable embodied intelligence.",
+      "authors": [
+        "Mohammad Zamani",
+        "Fatemeh Ziaeetabar"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-19T08:21:58+00:00",
+      "link": "https://arxiv.org/pdf/2608.18671v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "survey of vision-language models for egocentric video understanding and embodied AI",
+      "llm_evidence_cn": "面向自我中心视频理解与具身AI的视觉语言模型综述",
+      "llm_evidence": "面向自我中心视频理解与具身AI的视觉语言模型综述",
+      "canonical_evidence": "面向自我中心视频理解与具身AI的视觉语言模型综述",
+      "llm_tldr_en": "A survey of vision-language models for egocentric video understanding, covering hand-object interaction, temporal reasoning, and their role as foundations for embodied AI.",
+      "llm_tldr_cn": "自我中心视频从穿戴者视角捕捉注意、手物交互和目标导向行为，为穿戴智能与具身AI提供关键输入，但面临自我运动、遮挡和长时序依赖等挑战。视觉语言模型通过将视觉观察与语义知识和自然语言监督相联系，为此类理解提供了坚实基础。本文系统综述VLM在自我中心视频理解中的进展，梳理从手物交互到具身AI的研究路径，并讨论开放问题与未来方向。这对该交叉领域的研究者具有重要参考价值。",
+      "llm_tldr": "自我中心视频从穿戴者视角捕捉注意、手物交互和目标导向行为，为穿戴智能与具身AI提供关键输入，但面临自我运动、遮挡和长时序依赖等挑战。视觉语言模型通过将视觉观察与语义知识和自然语言监督相联系，为此类理解提供了坚实基础。本文系统综述VLM在自我中心视频理解中的进展，梳理从手物交互到具身AI的研究路径，并讨论开放问题与未来方向。这对该交叉领域的研究者具有重要参考价值。",
+      "llm_tags": [
+        "query:ai"
+      ],
+      "matched_query_tag": "query:ai",
+      "matched_query_text": "vision language model for visual understanding and reasoning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.18694v1",
+      "source": "arxiv",
+      "title": "Composed Historical Image Retrieval by Modeling Temporal Representations",
+      "abstract": "While time evolves linearly, the geometry of neural embedding spaces is inherently multi-dimensional, often chaotic, and difficult to interpret. In principle, one could constrain an embedding space to a single temporal dimension; however, such a reduction would sacrifice performance on downstream tasks, as one-dimensional embeddings cannot retain sufficient expressive capacity. This paper asks whether it is possible to learn representations that preserve temporal structure while remaining effective for image and object retrieval, and answers this question by building the mathematical foundations of such a system. We propose Temporally Decomposable Image Representations (TDIR), a representation learning algorithm that decomposes historical photographs into separate date and content components through orthogonal subspaces. We define and prove the conditions under which such a decomposition is achievable, characterize the error incurred when those conditions are only partially met, and show that orthogonality between temporal and categorical subspaces emerges naturally from the joint optimization, without requiring it to be imposed explicitly. Beyond its geometric properties, TDIR enables a class of transitive operations on embedding spaces: the temporal information of one image can be extracted and injected into the representation of another, with no label supervision required. All theoretical properties are grounded and validated in the real-world problem of Composed Image Retrieval on historical photographs, where a query simultaneously specifies object content and a target time period, either through labels or through example images. This in-the-wild setting serves as a concrete backing for the propositions we derive, offering an intuitive and interpretable way to navigate photographic archives while maintaining competitive performance in both date estimation and object retrieval.",
+      "authors": [
+        "Adrià Molina Rodríguez",
+        "Oriol Ramos Terrades",
+        "Josep Lladós Canet"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.IR"
+      ],
+      "published": "2026-08-19T08:48:21+00:00",
+      "link": "https://arxiv.org/pdf/2608.18694v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "representation learning for image retrieval",
+      "llm_evidence_cn": "面向图像检索的视觉特征表示学习",
+      "llm_evidence": "面向图像检索的视觉特征表示学习",
+      "canonical_evidence": "面向图像检索的视觉特征表示学习",
+      "llm_tldr_en": "Proposes Temporally Decomposable Image Representations (TDIR), a representation learning algorithm that decomposes historical photos to preserve temporal structure while retaining effectiveness for image and object retrieval.",
+      "llm_tldr_cn": "针对图像检索中神经嵌入空间时间结构难以解释且表达能力受限的问题，提出时间可分解图像表示（TDIR）。该算法通过将历史照片分解为时间相关的表示，在保持时间结构的同时不牺牲下游检索性能。实验中在历史图像与物体检索任务上验证了其有效性。表明显式时间分解是连接表示几何与检索任务的有效途径。",
+      "llm_tldr": "针对图像检索中神经嵌入空间时间结构难以解释且表达能力受限的问题，提出时间可分解图像表示（TDIR）。该算法通过将历史照片分解为时间相关的表示，在保持时间结构的同时不牺牲下游检索性能。实验中在历史图像与物体检索任务上验证了其有效性。表明显式时间分解是连接表示几何与检索任务的有效途径。",
+      "llm_tags": [
+        "query:cv"
+      ],
+      "matched_query_tag": "query:cv",
+      "matched_query_text": "learning visual feature representations from images",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.20122v1",
+      "source": "arxiv",
+      "title": "ArmorOCR: Grounded Adversarial Visual Perception via Observation-Transferred Self-Distillation",
+      "abstract": "Large multimodal models (LMMs) have demonstrated strong OCR recognition capabilities, yet remain vulnerable to adversarial visual text that is readable to humans but challenging for models to localize and recognize. Existing OCR benchmarks mainly focus on natural or document-style text, while adversarial OCR evaluations remain limited in scale, task coverage, or region-aware evaluation. In this paper, we formulate adversarial OCR as a \\textbf{grounded OCR perception} task and introduce \\textbf{AdvSpot}, the first benchmark for grounded adversarial OCR evaluation. AdvSpot comprises 390 images with region-level annotations, spanning 5 primary categories and 13 fine-grained adversarial OCR types. To address this challenge, we propose \\textbf{ArmorOCR}, a two-stage training framework for robust adversarial OCR perception. ArmorOCR first acquires missing adversarial OCR perception from privileged transformed observations through On-Policy Self-Distillation (OPSD), and then refines grounded OCR perception through Group Relative Policy Optimization (GRPO) with task-conditioned rewards for localization, recognition, full spotting, and visual question answering (VQA). Experiments on our AdvSpot, other adversarial OCR benchmarks, and general OCR benchmarks demonstrate that ArmorOCR consistently improves adversarial OCR perception while preserving competitive general OCR capability.",
+      "authors": [
+        "Linhan Cao",
+        "Siyuan Li",
+        "Jun Lan",
+        "Liangbo He",
+        "Guannan Li",
+        "Xiaolei Huang",
+        "Jun Jia",
+        "Shuheng Zhou",
+        "Huijia Zhu",
+        "Weiqiang Wang",
+        "Wei Sun"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-20T14:52:06+00:00",
+      "link": "https://arxiv.org/pdf/2608.20122v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Grounded adversarial OCR for large multimodal models",
+      "llm_evidence_cn": "大型多模态模型的接地对抗OCR",
+      "llm_evidence": "大型多模态模型的接地对抗OCR",
+      "canonical_evidence": "大型多模态模型的接地对抗OCR",
+      "llm_tldr_en": "LMMs are vulnerable to adversarial visual text. This paper introduces AdvSpot, a grounded adversarial OCR benchmark with 390 region-annotated images, and ArmorOCR via observation-transferred self-distillation, improving localization and recognition.",
+      "llm_tldr_cn": "大型多模态模型在对抗性视觉文本上表现脆弱，现有OCR基准缺乏区域级的对抗评测。本文提出AdvSpot基准，包含390幅区域级标注图像，覆盖5大类13种对抗OCR类型，并构建了接地对抗OCR感知任务。作者提出ArmorOCR方法，利用观察迁移自蒸馏增强模型的定位与识别能力。实验表明，该方法能有效提升对抗场景下的OCR鲁棒性，为多模态视觉感知提供了新评测基准与训练策略。",
+      "llm_tldr": "大型多模态模型在对抗性视觉文本上表现脆弱，现有OCR基准缺乏区域级的对抗评测。本文提出AdvSpot基准，包含390幅区域级标注图像，覆盖5大类13种对抗OCR类型，并构建了接地对抗OCR感知任务。作者提出ArmorOCR方法，利用观察迁移自蒸馏增强模型的定位与识别能力。实验表明，该方法能有效提升对抗场景下的OCR鲁棒性，为多模态视觉感知提供了新评测基准与训练策略。",
+      "llm_tags": [
+        "query:ai"
+      ],
+      "matched_query_tag": "query:ai",
+      "matched_query_text": "vision language model for visual understanding and reasoning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.18709v1",
+      "source": "arxiv",
+      "title": "A Critical Synthesis of Uncertainty Quantification and Foundation Models for Semantic Segmentation",
+      "abstract": "Foundation models are increasingly breaking what seemed to be impossible not long ago by enabling unprecedented accuracy and cross-domain generalization. Yet their lack of interpretability, tendency to be overconfident, and sensitivity to real-world domain shifts pose critical challenges for safety- and mission-critical applications. Uncertainty quantification (UQ) offers a principled way to address these issues, but its integration into segmentation foundation models has yet to be explored. In this paper we present the first systematic evaluation of UQ methods applied to a foundation model for semantic segmentation. We fine-tune a lightweight DPT decoder on top of the pretrained SAM2 encoder to establish a simple yet competitive baseline and benchmark four representative UQ approaches - Monte Carlo Dropout, Deep Sub-Ensemble, Test-Time Augmentation, and Evidential Deep Learning - across Cityscapes, NYUv2, and two challenging out-of-domain settings. Our analysis compares segmentation accuracy, calibration, uncertainty quality, and inference time, revealing clear trade-offs between predictive performance, reliability, and computational cost. These results highlight both the promise and the current limitations of uncertainty-aware foundation models, pointing to the need for future work that jointly optimizes accuracy, robustness, and efficiency for real-world deployment.",
+      "authors": [
+        "Steven Landgraf",
+        "Joceline Hinz",
+        "Markus Ulrich"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-08-19T09:09:42+00:00",
+      "link": "https://arxiv.org/pdf/2608.18709v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Foundation models for semantic segmentation with uncertainty quantification",
+      "llm_evidence_cn": "面向语义分割的基础模型与不确定性量化",
+      "llm_evidence": "面向语义分割的基础模型与不确定性量化",
+      "canonical_evidence": "面向语义分割的基础模型与不确定性量化",
+      "llm_tldr_en": "First systematic evaluation of uncertainty quantification methods on a segmentation foundation model built from SAM2 encoder and DPT decoder, showing overconfidence and calibration benefits.",
+      "llm_tldr_cn": "针对分割基础模型缺乏不确定性量化评估的问题，论文首次系统评估了多种不确定量化方法在语义分割基础模型上的表现。作者在预训练SAM2编码器之上微调轻量DPT解码器建立基线，并整合不确定性估计。实验表明基础模型在域偏移下往往过度自信，不确定性量化可有效提升校准质量，为安全关键应用部署分割基础模型提供了系统基线。",
+      "llm_tldr": "针对分割基础模型缺乏不确定性量化评估的问题，论文首次系统评估了多种不确定量化方法在语义分割基础模型上的表现。作者在预训练SAM2编码器之上微调轻量DPT解码器建立基线，并整合不确定性估计。实验表明基础模型在域偏移下往往过度自信，不确定性量化可有效提升校准质量，为安全关键应用部署分割基础模型提供了系统基线。",
+      "llm_tags": [
+        "query:cv"
+      ],
+      "matched_query_tag": "query:cv",
+      "matched_query_text": "large-scale pre-trained foundation models for vision",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.18979v1",
+      "source": "arxiv",
+      "title": "When Simplicity Wins: Bottleneck-Aware Context Modeling for Lightweight Semantic Segmentation",
+      "abstract": "Semantic segmentation demands a careful balance between accuracy, efficiency, and scalability, which remains difficult to achieve for high-resolution imagery. Convolutional networks effectively model local patterns but struggle with long-range dependencies, whereas Vision Transformers capture global context at a high computational cost. While recent work largely focuses on encoder design, the bottleneck stage, central to contextual aggregation and information flow, has been relatively overlooked. We propose SiConMo, a lightweight yet effective framework, implemented in two variants: an RGB-only model (SiConMo) and a GME-enhanced variant (SiConMo$_\\dagger$). We show that simplicity arises from a key design principle: at very low computational budgets, the bottleneck is the most efficient stage to integrate local and global context. SiConMo integrates three complementary components: a Token Pyramid Extraction Module for hierarchical multi-scale representation, a Transformer-Branched Depthwise Convolution block for bottleneck-aware context modeling, and a Feature Merging Module that preserves spatial structure while enhancing semantic consistency. Extensive experiments on ADE20K, PASCAL Context, Cityscapes, and COCO-Stuff demonstrate that SiConMo achieves a state-of-the-art accuracy-efficiency trade-off among lightweight semantic segmentation models, highlighting simplicity as a powerful design principle.",
+      "authors": [
+        "Mian Muhammad Naeem Abid",
+        "Nancy Mehta",
+        "Zongwei Wu",
+        "Radu Timofte"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-19T14:47:07+00:00",
+      "link": "https://arxiv.org/pdf/2608.18979v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "CNN-ViT hybrid with bottleneck-aware context modeling for lightweight semantic segmentation",
+      "llm_evidence_cn": "面向轻量级语义分割的CNN-Transformer混合瓶颈感知上下文建模",
+      "llm_evidence": "面向轻量级语义分割的CNN-Transformer混合瓶颈感知上下文建模",
+      "canonical_evidence": "面向轻量级语义分割的CNN-Transformer混合瓶颈感知上下文建模",
+      "llm_tldr_en": "Proposes SiConMo, a lightweight semantic segmentation framework that focuses on bottleneck-stage context modeling, combining convolutional local patterns with efficient global context for high-resolution imagery.",
+      "llm_tldr_cn": "针对高分辨率语义分割中精度、效率与可扩展性难以平衡的问题，本文提出轻量级框架SiConMo，聚焦于常被忽略的瓶颈阶段，通过简洁的瓶颈感知上下文建模在极低计算开销下结合卷积局部建模与Transformer全局上下文。实验证明其在保证轻量化的同时有效提升分割精度，为高分辨率图像实时语义分割提供了实用设计原则。",
+      "llm_tldr": "针对高分辨率语义分割中精度、效率与可扩展性难以平衡的问题，本文提出轻量级框架SiConMo，聚焦于常被忽略的瓶颈阶段，通过简洁的瓶颈感知上下文建模在极低计算开销下结合卷积局部建模与Transformer全局上下文。实验证明其在保证轻量化的同时有效提升分割精度，为高分辨率图像实时语义分割提供了实用设计原则。",
+      "llm_tags": [
+        "query:cv"
+      ],
+      "matched_query_tag": "query:cv",
+      "matched_query_text": "vision transformer architecture for image recognition",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.20868v1",
+      "source": "arxiv",
+      "title": "Identify, Locate, Link: End-to-End Key-Value Extraction from Document Images",
+      "abstract": "Document processing pipelines traditionally cascade optical character recognition (OCR) engines with downstream models for structured information extraction, leading to multi-stage error propagation. We fine-tune SmolDocling, a compact 256M-parameter vision-language model (VLM), to perform end-to-end key-value extraction directly from document images, jointly solving identification, localization, and association in a single pass without OCR preprocessing. We extend DocTags with specialized key, value, region, and link tags, enabling many-to-many relationships in a unified output sequence. To address data limitations, we design an augmentation pipeline combining synthetic form filling and graph-based crops that preserve complete key-value subgraphs. We further introduce a layout-aware evaluation framework extending text matching with spatial bounding box verification. On FUNSD, XFUND, and a large-scale private dataset, our model outperforms larger zero-shot VLM baselines under layout-aware evaluation, while being 27 times smaller than Qwen2.5-VL (7B) and over 5 times faster at inference. The model weights will be released publicly after publication.",
+      "authors": [
+        "A. Said Gurbuz",
+        "Ahmed Nassar",
+        "Christoph Auer",
+        "Maksym Lysak",
+        "Lucas Morin",
+        "Matteo Omenetti",
+        "Tim Strohmeyer",
+        "Panagiotis Vagenas",
+        "Nikolaos Livathinos",
+        "Michele Dolfi",
+        "Peter Staar"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-08-21T08:36:23+00:00",
+      "link": "https://arxiv.org/pdf/2608.20868v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "End-to-end key-value extraction with compact VLM",
+      "llm_evidence_cn": "紧凑VLM端到端键值抽取",
+      "llm_evidence": "紧凑VLM端到端键值抽取",
+      "canonical_evidence": "紧凑VLM端到端键值抽取",
+      "llm_tldr_en": "Document key-value extraction often cascades OCR with downstream models, causing error propagation. SmolDocling, a compact VLM, is fine-tuned for end-to-end key-value extraction without OCR, jointly solving identification, localization, and association.",
+      "llm_tldr_cn": "文档键值抽取常串联OCR模型与下游提取器，导致多阶段误差累积。本文将紧凑的256M参数视觉语言模型SmolDocling微调为端到端键值抽取器，无需OCR预处理即可同时完成键值识别、定位与关联。通过扩展DocTags并设计合成表单填充和图裁剪增强管道，模型能处理多对多关系。实验证明该方法减少了级联错误，实现了高效的结构化文档理解。",
+      "llm_tldr": "文档键值抽取常串联OCR模型与下游提取器，导致多阶段误差累积。本文将紧凑的256M参数视觉语言模型SmolDocling微调为端到端键值抽取器，无需OCR预处理即可同时完成键值识别、定位与关联。通过扩展DocTags并设计合成表单填充和图裁剪增强管道，模型能处理多对多关系。实验证明该方法减少了级联错误，实现了高效的结构化文档理解。",
+      "llm_tags": [
+        "query:ai"
+      ],
+      "matched_query_tag": "query:ai",
+      "matched_query_text": "vision language model for visual understanding and reasoning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.18907v1",
+      "source": "arxiv",
+      "title": "Learning-State-Aware Dynamic Generative Data Augmentation on Small-Scale Datasets",
+      "abstract": "Small-scale image classification is often limited by the scarcity of training data. Generative data augmentation (GDA) based on pretrained generative models has emerged as an effective solution. However, existing methods rely on task-agnostic augmentation strategies that overlook downstream model needs. Although recent dynamic GDA methods incorporate model feedback to guide augmentation, they still struggle to reliably determine sample-specific augmentation strengths and adapt augmentation strategies to different image regions while balancing image diversity and class semantics.   To address these issues, we propose learning-state-aware dynamic generative data augmentation (LSADA). Specifically, LSADA constructs a learning state for each sample based on its current loss and loss-decrease rate, which is then mapped to a sample-specific augmentation strength. Furthermore, LSADA introduces a decoupled data augmentation and diffusion fusion strategy that applies strength-controlled transformations to class-relevant regions and generates diverse class-irrelevant regions, progressively fusing them to improve image diversity while preserving class semantics. Experiments on nine public datasets show that LSADA outperforms the existing SOTA dynamic GDA method by an average of 4.5% on six natural image datasets and 2.5% on three medical image datasets.",
+      "authors": [
+        "Ting Xiang",
+        "Chenxi Deng",
+        "Jinhui Zhao",
+        "Bingting Jiang",
+        "Ke Zhang",
+        "Changjian Chen",
+        "Zhuo Tang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-08-19T13:31:21+00:00",
+      "link": "https://arxiv.org/pdf/2608.18907v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Learning-state-aware dynamic generative data augmentation for small-scale image classification",
+      "llm_evidence_cn": "面向小样本图像分类的学习状态感知动态生成式数据增强",
+      "llm_evidence": "面向小样本图像分类的学习状态感知动态生成式数据增强",
+      "canonical_evidence": "面向小样本图像分类的学习状态感知动态生成式数据增强",
+      "llm_tldr_en": "LSADA constructs per-sample learning states to dynamically guide generative data augmentation, adapting augmentation strength and region-specific strategies to improve small-scale image classification.",
+      "llm_tldr_cn": "针对小规模图像分类中生成式数据增强策略忽视下游模型状态、难以平衡多样性与类别语义的问题，本文提出LSADA方法，为每个样本构建学习状态并据此动态调整增强强度和区域增强策略。该方法在保留类别语义的同时提升样本多样性，在多个小样本图像分类任务上相比现有动态增强方法取得更优性能，为数据稀缺场景下的分类提供了实用解法。",
+      "llm_tldr": "针对小规模图像分类中生成式数据增强策略忽视下游模型状态、难以平衡多样性与类别语义的问题，本文提出LSADA方法，为每个样本构建学习状态并据此动态调整增强强度和区域增强策略。该方法在保留类别语义的同时提升样本多样性，在多个小样本图像分类任务上相比现有动态增强方法取得更优性能，为数据稀缺场景下的分类提供了实用解法。",
+      "llm_tags": [
+        "query:cv"
+      ],
+      "matched_query_tag": "query:cv",
+      "matched_query_text": "image classification using deep neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.19285v1",
+      "source": "arxiv",
+      "title": "Clustering and Token Denoising for Faster and More Robust VLMs",
+      "abstract": "Recent Visual-Language Models (VLMs) have enhanced the capabilities of pre-trained LLMs by adding vision tokens alongside text, with approaches like LLaVA showing impressive results. However, the computational burden of processing up to 576 or 729 visual tokens makes edge deployment challenging. While various token pruning techniques require retraining, some are training-free and thus can easily adapt to architecture changes. We introduce ClustRS, a two-part, training-free algorithm for robust token pruning. Its first component is an attention-weighted, clustering algorithm that selects representative tokens from each semantic cluster. The second component, Residual Shrinkage, is a one-pass denoising step on the selected tokens. These training-free lightweight steps make LLaVA ready for real-world data, improving robustness to a wide range of image-noise types and intensities. Experimental results on the ScienceQA-IMG and MM-VET benchmarks show our method outperforms attention- and diversity-based methods by up to 20\\% under extreme noise and token conditions (reducing tokens by 97\\%, down to 16 tokens) on LLaVA 1.5 7b and achieves exceptional results on LLaVA-OneVision, where we match baseline performance with fewer than one-third of their tokens under mild noise conditions. Our study demonstrates a simple yet powerful alternative to both score-only and diversity-only pruning rules, paving the way for compute-efficient and noise-resilient VLM deployment.",
+      "authors": [
+        "Baptiste Rossigneux",
+        "Inna Kucher",
+        "Vincent Lorrain",
+        "Emmanuel Casseau"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-08-19T11:20:26+00:00",
+      "link": "https://arxiv.org/pdf/2608.19285v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "training-free token pruning for faster and more robust vision-language models",
+      "llm_evidence_cn": "面向视觉语言模型的免训练标记剪枝，提升速度与鲁棒性",
+      "llm_evidence": "面向视觉语言模型的免训练标记剪枝，提升速度与鲁棒性",
+      "canonical_evidence": "面向视觉语言模型的免训练标记剪枝，提升速度与鲁棒性",
+      "llm_tldr_en": "VLMs like LLaVA struggle with hundreds of visual tokens on edge devices. ClustRS is a training-free two-part algorithm with attention-weighted clustering to select representative tokens and residual shrinkage to denoise them, achieving robust token pruning and faster VLM inference.",
+      "llm_tldr_cn": "以LLaVA为代表的视觉语言模型需要处理数百个视觉标记，计算负担使其难以在边缘部署。现有标记剪枝多需重新训练，而免训练方法易受架构变化影响。本文提出ClustRS，由注意力加权聚类选择各语义簇的代表性标记，并配合残差收缩做单遍去噪，整个算法无需训练。该方法能在保持鲁棒性的同时大幅减少视觉标记数量，且轻量易用、可适配架构更新，为视觉语言模型端侧推理提供高效剪枝方案。",
+      "llm_tldr": "以LLaVA为代表的视觉语言模型需要处理数百个视觉标记，计算负担使其难以在边缘部署。现有标记剪枝多需重新训练，而免训练方法易受架构变化影响。本文提出ClustRS，由注意力加权聚类选择各语义簇的代表性标记，并配合残差收缩做单遍去噪，整个算法无需训练。该方法能在保持鲁棒性的同时大幅减少视觉标记数量，且轻量易用、可适配架构更新，为视觉语言模型端侧推理提供高效剪枝方案。",
+      "llm_tags": [
+        "query:ai"
+      ],
+      "matched_query_tag": "query:ai",
+      "matched_query_text": "vision language model for visual understanding and reasoning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.21142v1",
+      "source": "arxiv",
+      "title": "COEC: Calibrated Orthogonal-Equivalence Compensation for Structured Pruning of Large Language Models",
+      "abstract": "Structured pruning reduces the size and inference cost of large language models (LLMs) by removing weight columns, but the resulting output error can degrade accuracy. Existing training-free compensation methods use an additive bias or a single orthogonal rotation on the output side of the retained weight. These corrections leave its input singular frame unchanged and therefore limit how the retained weight can adapt after column removal. We propose COEC (Calibrated Orthogonal-Equivalence Compensation), a training-free compensation framework that applies alternating left and right orthogonal rotations to the retained weight. The right rotation is optimized on a reduced Stiefel manifold, while singular values are rescaled using generalized cross-validation to select the regularization strength for each layer. COEC further tempers the calibration Gram matrix to reduce the dominance of high-energy activation directions and introduces an alignment penalty that preserves the geometric relation between adjacent attention projections.All components use second-order statistics from a small calibration set and require neither backpropagation through the LLM nor retraining of the model parameters. COEC is independent of the column pruning criterion and can be applied to multiple structured pruning methods. Experiments on the Llama-3, Llama-3.1, and Qwen2.5 model families across multiple structured sparsity levels show that COEC improves perplexity on every model and zero-shot accuracy in most settings over existing compensation methods, with larger gains at higher sparsity. These results show that post-pruning compensation can recover part of the performance lost to column removal.",
+      "authors": [
+        "Peiqi Yu",
+        "Nam Ling",
+        "Wei Wang",
+        "Wei Jiang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-08-21T14:20:49+00:00",
+      "link": "https://arxiv.org/pdf/2608.21142v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "training-free structured pruning compensation for large language models",
+      "llm_evidence_cn": "大语言模型的结构化剪枝训练无关补偿",
+      "llm_evidence": "大语言模型的结构化剪枝训练无关补偿",
+      "canonical_evidence": "大语言模型的结构化剪枝训练无关补偿",
+      "llm_tldr_en": "COEC applies alternating left-right orthogonal rotations to retained weights, optimizing on a reduced Stiefel manifold to compensate structured pruning of LLMs training-free.",
+      "llm_tldr_cn": "结构化剪枝在压缩大语言模型时会引入输出误差。现有训练无关补偿仅用加性偏置或单侧正交旋转，限制权重适应性。本文提出COEC，对保留权重交替施加左右正交旋转，并在降维Stiefel流形上优化右旋转，同时重缩放奇异值。该方法在无需训练的情况下有效缓解剪枝精度下降，为LLM压缩提供了更精细的补偿手段。",
+      "llm_tldr": "结构化剪枝在压缩大语言模型时会引入输出误差。现有训练无关补偿仅用加性偏置或单侧正交旋转，限制权重适应性。本文提出COEC，对保留权重交替施加左右正交旋转，并在降维Stiefel流形上优化右旋转，同时重缩放奇异值。该方法在无需训练的情况下有效缓解剪枝精度下降，为LLM压缩提供了更精细的补偿手段。",
+      "llm_tags": [
+        "query:ai"
+      ],
+      "matched_query_tag": "query:ai",
+      "matched_query_text": "large language model architecture and application research",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.18996v1",
+      "source": "arxiv",
+      "title": "GrabVG: Graph-Attentive Binding for Visual Grounding in UAV Imagery",
+      "abstract": "Visual grounding in Unmanned Aerial Vehicle (UAV) imagery aims to localize a target object in complex bird's-eye-view scenes according to a natural language description. However, the abundance of small, densely distributed, and visually similar objects creates high visual redundancy, while repetitive local configurations give rise to strong topological ambiguity. Existing approaches mainly focus on visual--language feature alignment or dense contextual interaction, yet they struggle to distinguish subtle inter-instance differences and effectively exploit spatial topological structures, leading to inaccurate grounding in highly crowded scenarios. To address these challenges, we propose $\\textbf{GrabVG}$, a novel visual grounding framework inspired by human visual search. GrabVG explicitly decomposes grounding into two sequential stages: $\\textit{preattentive hypothesis search}$ and $\\textit{graph-attentive feature binding}$. Specifically, we first generate a compact set of reliable object hypotheses through distillation-guided proposal induction and text-aware hypothesis filtering, substantially reducing background distractions and semantic mismatches. These hypotheses are then organized into a sparse graph, where language-guided intra-instance visual cues and inter-instance topological relationships are jointly bound and propagated via graph attention, enabling efficient spatial reasoning and accurate target localization. Extensive experiments on AerialVG and AerialSense show that GrabVG achieves a favorable accuracy--speed trade-off, reaching 67.31$\\%$ and 80.34$\\%$ Acc@0.5 and outperforming the corresponding baselines by 10.55 and 8.76 percentage points, respectively.",
+      "authors": [
+        "Chaowei Wang",
+        "Yan Di",
+        "Jingjun Sun",
+        "Baozhe Liu",
+        "Jiaxu Tian",
+        "Yuheng Li",
+        "Guangqian Guo",
+        "Shan Gao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-08-19T15:00:02+00:00",
+      "link": "https://arxiv.org/pdf/2608.18996v1",
+      "tags": [
+        "keyword:AI",
+        "keyword:CV",
+        "keyword:hsi-zsl",
+        "query:AI",
+        "query:CV",
+        "query:hsi-zsl"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Vision-language visual grounding with graph-attentive binding for UAV imagery",
+      "llm_evidence_cn": "面向视觉语言理解与推理的无人机视觉定位",
+      "llm_evidence": "面向视觉语言理解与推理的无人机视觉定位",
+      "canonical_evidence": "面向视觉语言理解与推理的无人机视觉定位",
+      "llm_tldr_en": "GrabVG introduces graph-attentive binding for visual grounding in UAV imagery, exploiting spatial topology and inter-instance differences to address high visual redundancy and topological ambiguity in crowded bird's-eye-view scenes.",
+      "llm_tldr_cn": "无人机影像中的视觉定位常因目标小、分布密集且外观相似而产生冗余和歧义，现有方法难以区分实例差异。为此提出GrabVG，利用图注意力机制绑定视觉与语言线索，并显式建模空间拓扑结构。在高度拥挤场景下，GrabVG能够更准确地定位语言描述的目标，缓解了视觉冗余与拓扑歧义。该工作展示了图结构建模对无人机视觉语言定位任务的价值。",
+      "llm_tldr": "无人机影像中的视觉定位常因目标小、分布密集且外观相似而产生冗余和歧义，现有方法难以区分实例差异。为此提出GrabVG，利用图注意力机制绑定视觉与语言线索，并显式建模空间拓扑结构。在高度拥挤场景下，GrabVG能够更准确地定位语言描述的目标，缓解了视觉冗余与拓扑歧义。该工作展示了图结构建模对无人机视觉语言定位任务的价值。",
+      "llm_tags": [
+        "query:ai"
+      ],
+      "matched_query_tag": "query:ai",
+      "matched_query_text": "vision language model for visual understanding and reasoning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    }
+  ]
+}

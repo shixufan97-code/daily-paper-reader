@@ -1,0 +1,1399 @@
+Title: Composed Historical Image Retrieval by Modeling Temporal Representations
+
+URL Source: https://arxiv.org/pdf/2608.18694v1
+
+Published Time: Thu, 20 Aug 2026 00:39:17 GMT
+
+Number of Pages: 33
+
+Markdown Content:
+> arXiv:2608.18694v1 [cs.CV] 19 Aug 2026
+
+A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 1
+
+# Composed Historical Image Retrieval by Modeling Temporal Representations 
+
+Adrià Molina 1,2 
+
+amolina@cvc.uab.cat 
+
+Oriol Ramos Terrades 1,2 
+
+oriolrt@cvc.uab.cat 
+
+Josep Lladós 1,2 
+
+josep@cvc.uab.cat  
+
+> 1
+
+Centre de Visió per Computador Universitat Autònoma de Barcelona Bellaterra, Catalonia  
+
+> 2
+
+Computer Science Department Universitat Autònoma de Barcelona, Bellaterra, Catalonia 
+
+Abstract 
+
+While time evolves linearly, the geometry of neural embedding spaces is inherently multi-dimensional, often chaotic, and difficult to interpret. In principle, one could con-strain an embedding space to a single temporal dimension; however, such a reduction would sacrifice performance on downstream tasks, as one-dimensional embeddings can-not retain sufficient expressive capacity. This paper asks whether it is possible to learn representations that preserve temporal structure while remaining effective for image and object retrieval, and answers this question by building the mathematical foundations of such a system. We propose Temporally Decomposable Image Representations (TDIR), a representation learning algorithm that decomposes historical photographs into sepa-rate date and content components through orthogonal subspaces. We define and prove the conditions under which such a decomposition is achievable, characterize the error incurred when those conditions are only partially met, and show that orthogonality be-tween temporal and categorical subspaces emerges naturally from the joint optimization, without requiring it to be imposed explicitly. Beyond its geometric properties, TDIR en-ables a class of transitive operations on embedding spaces: the temporal information of one image can be extracted and injected into the representation of another, with no label supervision required. All theoretical properties are grounded and validated in the real-world problem of Composed Image Retrieval on historical photographs, where a query simultaneously specifies object content and a target time period, either through labels or through example images. This in-the-wild setting serves as a concrete backing for the propositions we derive, offering an intuitive and interpretable way to navigate photo-graphic archives while maintaining competitive performance in both date estimation and object retrieval. 
+
+## 1 Introduction 
+
+Despite photography emerging late during the 19th century, it still comprises an important portion of archival data. More precisely, around 5-10% of archival material is estimated to be non-textual (see Appendix B), despite covering a significantly shorter historical span 
+
+© 2026. The copyright of this document resides with its authors. It may be distributed unchanged freely in print or electronic forms. 2 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL        
+
+> how did cars look during 1956 ?
+> Query-by-label
+> 1956 cars
+> ✓
+> how did look during 1989 ?
+> Query-by-example
+> 1989
+> how did look during ?
+> Query-by-examples
+> ✓
+
+(a) (b) (c) Figure 1: Visual abstract of the three proposed representation objectives, showing composed image retrieval for query-by-label (a), query-by-example (b) and query-by-examples (c), in the latter, the idea is to inject the temporal information of an image into the object represen-tation of the other query. than printed or handwritten documents. Unlike traditional historical records, however, pho-tographs encode most of their information visually, making their description through discrete metadata inherently restrictive. In this context, many Digital Humanities projects aim to im-prove access to non-textual collections through semantic search [35] or automatic metadata completion [7]. Among such metadata descriptors, the date of a photograph is one of the most prominent task in historical photography analysis [3, 19, 23, 24, 33], as it enables his-torians and social scientists to contextualise much of the information contained in the image. Temporal information alone, however, is insufficient for a complete archival description. Archivists must also contextualise the depicted objects within their historical period. In archival science terms [25], the preservation interest of a document is partially determined by its probative value : the capacity of the image to uniquely illustrate an event, person, technology, or phenomenon. This requires understanding not only when a photograph was taken, but also how the objects it contains relate to their historical moment. This archival reasoning has direct implications for image analysis. Methods for automatic date estima-tion have evolved from low-level visual predictors [23] toward semantic and object-centric approaches [22]. We argue that the latter is closer to the reasoning process of archivists, who infer dates through the historical signatures of the objects appearing in the scene. Ob-jects such as cars, clothes, or posters evolve at different temporal rhythms, allowing trained observers to identify inconsistencies or confirming regularities at a glance. This object-sensitive reasoning, however, is difficult to replicate in standard neural repre-sentations, where colour, texture, objects, and date tend to be entangled in ways that obscure the individual temporal evolution of each category. More critically for archival practice, cur-rent retrieval systems do not allow a user to query an archive by composing an object of interest with a target time period, as an archivist naturally would. As illustrated in Figure 1, the ideal system would support queries such as: “find images of jackets from the 1940s” , or more powerfully, “find images of cars that look contemporaneous to this photograph of a politician” — without requiring any date label for the reference image. To enable this, we propose Temporally Decomposable Image Representations (TDIR) ,a formal framework for representation learning in which the temporal and categorical com-ponents of an image embedding are separated into orthogonal subspaces. We formalise the conditions under which such a decomposition holds, prove that the required orthogonality A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 3
+
+emerges naturally from joint optimisation, and characterise the error incurred when those conditions are only partially met. These theoretical contributions are, to our knowledge, the first formal treatment of temporal decomposability in visual embeddings and stand indepen-dently of any specific application. Concretely, we establish two formal properties: • Temporally Decomposable Image Representation: an embedding space is tempo-rally decomposable when any representation can be expressed as a linear combination of independent category and year vectors, such that each component exclusively en-codes its respective factor of variation. • Joint Proxy Optimization: We propose a joint optimization which promotes TDIR in real case scenarios. Thus, the year centroid, interpreted as a displacement vector, can transport any representation to a different date without altering its categorical content. Beyond their theoretical interest, both properties admit a practically relevant instantia-tion: Composed Image Retrieval on in-the-wild historical photographs, where a query si-multaneously specifies object content and a target time period. This provides empirical evi-dence that the derived properties yield interpretable behavior in applied settings beyond the theoretical formulation of the framework. 
+
+## 2 Related Work 
+
+Early approaches to photographic date estimation relied on low-level visual cues such as colour histograms and film grain [23], while more recent methods leverage semantic fea-tures. Crucially, however, none of these works formalise the desired properties of an ideal temporal representation. Müller et al. introduce the DEW benchmark and treat date estima-tion as a regression problem [19], without characterising the geometric structure that makes a representation well-suited for this task. Post-hoc analyses have revealed that temporal struc-ture does emerge in general-purpose embeddings: In [17], the authors propose a loss function that can re-organise vision embeddings according to a fixed temporal criteria, this temporal geometry is observed to naturally emerge through CLIP pretraining [32], where embeddings carry rankable temporal information. Neither work describes how to induce such structure by design, nor what formal properties an ideally disentangled temporal representation should satisfy. TDIR addresses precisely this gap. A complementary line of work argues that date estimation should be grounded in the objects present in a scene, mirroring the reasoning of trained archivists. Ashida et al. [2] propose an object-centred ensemble restricted to human subjects, and Net et al. [22] extend this idea to a broader set of object categories via a transformer-based architecture trained on DEW, introducing the DEW-B benchmark. However, both works treat object-centricity as a means to improve date prediction, not as a representational goal in its own right: object identity is discarded once the date is estimated. Furthermore, since [22] requires training a dedicated image encoder per object category, the method is evaluated on only six categories, which raises scalability concerns to larger object sets. By contrast, TDIR jointly preserves both categorical and temporal factors within a sin-gle unified backbone, enabling retrieval along either dimension independently and scaling naturally to a large number of object categories. Composed Image Retrieval (CIR), which involves querying by combining a reference image with a modification attribute, has been studied in general-domain settings [28, 34], but existing historical benchmarks do not sup-port this paradigm. DEW provides date annotations without object labels [19]; IMAGO and 4 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 
+
+yearbook-based datasets [24, 29, 33] are restricted to faces and thus offer only a single se-mantic category. EUFCC-CIR proposed a composed retrieval dataset for cultural heritage collections [21], but it contains no temporal metadata, making category-date composition impossible. No existing benchmark simultaneously provides object-category and year-level annotations over a diverse photographic archive. 
+
+## 3 Methodology 
+
+3.1 Decomposable and Transitive Temporal Representations 
+
+Training operates on tuples T = ( xA, xB) where each image x carries two attributes: a cate-gory c ∈ { 1, . . . , C} and a year y ∈ { 1, . . . , Y }. In the tuples, cA = cB = c and yA̸ = yB. The geometric construction of our method rests on a key structural requirement for the year sub-space: that temporal displacements between dates behave consistently across all categories. 
+
+Definition 1 (Temporal Independence of Classes) . Given class and date centroids ( μc, μy)and their corresponding labels (c and y), a given representation is said to be temporally independent from the object classes when p(μc, c, μy, y) = p(μc, c) · p(μy, y) (1) From this definition, the pair (μc, c) is independent of (μy, y): category centroids carry no information about dates, and date centroids carry no information about categories. 
+
+Definition 2 (Temporal Transitivity) . For any ordered pair of dates (A, B), define the dis-placement vector ∆yA→B = μyB − μyA ∈ Rd . The year subspace is temporally transitive if, for any triple (A, B,C),
+
+∆yA→B + ∆yB→C = ∆yA→C. (2) This property is necessary for zero-label inference: it guarantees that a year residual extracted from any image acts as a consistent temporal operator when transplanted onto another image. We now introduce the proxy and residual structures that make this property learnable. 
+
+3.2 Proxy Sets 
+
+Let f : X → Rd be a CNN encoder. Each image x carries two attributes: a category c ∈{1, . . . , C} and a year y ∈ { 1, . . . , Y }. We seek a representation where these attributes occupy 
+
+orthogonal subspaces , admitting the decomposition: 
+
+v = f (x) = μc + μy, (3) where μc, μy ∈ Rd are random vectors acting as class centroids for object and temporal infor-mation. The ideal decomposition satisfies I(μc; μy) = 0: the two components are mutually uninformative, and their sum captures the full label-relevant content of v.A proxy p ∈ P is a learnable vector of the same dimensionality as the embedding space, representing the centroid of a contrastive class [18]. Unlike dataset-derived centroids, prox-ies are optimized end-to-end: they are simultaneously pulled toward the embeddings of their assigned class and pushed away from all others, converging to dynamic but class-specific attractors in Rd . We define three proxy sets: A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 5
+
+Category proxies Pc = {μc 
+
+> 1
+
+, . . . , μcC}. One proxy per object category. Each μc integrates over all years of category c, converging to a year-agnostic centroid. These operate on unnor-malized embeddings, so both magnitude and direction contribute to proxy assignment. 
+
+Year proxies Py = {μy 
+
+> 1
+
+, . . . , μyY }. One proxy per year, shared across all categories. These operate on ℓ2-normalized residuals ˆ u = u/∥u∥, reducing the dot product to cosine similarity and encoding temporal information purely in the angle of the representation — a design choice validated by our ablation study (Table 3). 
+
+Auxiliary displacement proxies Ky = {ky
+
+> 1
+
+, . . . , kyY }. One learnable displacement vector per year, shared across categories. These provide learned temporal offsets used during training to enforce transitivity (Definition 2). The set Ky is discarded at inference. Under the model assumptions of Definition 1, the following decomposability result holds: 
+
+Proposition 1 (Temporally Decomposable Image Representation) . Under the model as-sumptions of Definition 1: I(μc, μy; c, y) = I(μc; c) + I(μy; y) (4) See the proof in Appendix A.2. This implies that, under the class independence assump-tion, a visual embedding v = f (x) can be temporally decomposable with respect to the proxy sets Pc and Py. Because v = μy + μc, the mutual information between the joint labels and the full representation decomposes as: 
+
+I(v; c, y) = I(μc; c) + I(μy; y) (5) Ideally, the total information about both factors contained in v is fully decomposable into independent contributions: categorical information I(μc; c) and temporal information 
+
+I(μy; y). In the ideal case, μc and μy are full descriptors of v with respect to (c, y): knowing both proxies captures everything v encodes about category and year, with no label-relevant information remaining. In practice, however, there is some statistical entanglement between the appearance of certain objects and their respective dates. We therefore account for a residual signal ε ∈ Rd
+
+present in v:
+
+v = μc + μy + ε (6) 
+
+Proposition 2 (Practical Learnability of TDIRs) . Under the TDIR framework, the discrep-ancy term δ ≜ I(ε; c, y) depends exclusively on the statistical structure of the training data and not on the choice of proxy vectors μc or μy:I(v; c, y) ≤ I(μc; c) + I(μy; y) + δ where δ ≜ I(ε; c, y) (7) Consequently, δ constitutes a data-dependent constant with respect to the optimization, and the category and year centroids can be learned freely to satisfy the orthogonality con-straint ⟨μc, μy⟩ = 0 without affecting this error bound (see proof in Appendix A.3). A rep-resentation v becomes more temporally decomposable as δ decreases. This leaves open a potential circularity: Proposition 2 assumes orthogonality to guarantee free learning of μc
+
+and μy, yet this orthogonality has not been enforced. Theorem 1 will resolve this by showing that orthogonality emerges implicitly from the proposed training strategy. 6 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 
+
+> Category Clustering
+
+(a) 
+
+> Centering
+> - Proxy A
+> - Proxy B
+> - Proxy C
+
+(b) 
+
+> Date Proxy Optimization
+
+(c) 
+
+> Category Translation
+> +PA
+> +PB
+> +PC
+
+(d) 
+
+Figure 2: Training pipeline. (a) Proxy loss forms year-agnostic category clusters. (b) Sub-tracting μc centers each cluster into a shared temporal subspace. (c) Year proxies are opti-mized on normalized residuals via cosine distance. (d) The swapping trick translates residu-als across years, enforcing temporal transitivity. 
+
+3.3 Residual Vectors 
+
+Given the proxy sets above, we build four residual vectors from each training tuple T =(xA, xB) with shared category c and distinct years yA̸ = yB. The four-step geometric construc-tion is illustrated in Figure 2. 
+
+Direct residuals. Subtracting the category centroid μc re-centers each cluster at the origin, revealing the temporal component (Figure 2b): 
+
+rA = vA − μc, rB = vB − μc. (8) In rA and rB, the information necessary to infer the category has been removed. Conse-quently, even if temporal information were present in the category subspace, it is stripped from the representation and will not propagate to subsequent steps. 
+
+Shifted residuals (swapping trick). To enforce temporal transitivity, we additionally form two cross-year residuals using the auxiliary displacement proxies Ky:
+
+rA→B = ( vA − μc) + kyB, rB→A = ( vB − μc) + kyA. (9) The vector rA→B displaces image A’s temporal residual toward year yB; if the temporal man-ifold is truly transitive, this shifted residual should be indistinguishable from rB — and therefore close to μyB . The symmetric argument holds for rB→A. All four residuals are 
+
+ℓ2-normalized before being passed to the year loss: ˆr∗ ← r∗/∥r∗∥. (10) This normalization encodes temporal information purely as angular structure in the shared subspace (Figure 2c–d). 
+
+3.4 Proxy Losses and Joint Objective 
+
+Proxy loss. All objectives share a single form [18]. For an embedding u with ground-truth proxy μ∗ ∈ P , the proxy loss is: 
+
+L(u, μ∗; P) = − log exp (u⊤μ∗)
+
+## ∑
+
+> p∈P
+
+exp (u⊤ p) . (11) A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 7
+
+This is a softmax cross-entropy over proxy assignments: it maximizes the score of the correct proxy μ∗ relative to all others in P, pulling u into the neighborhood of μ∗ while repelling it from every competing proxy. 
+
+Category loss. The category subspace is optimized directly on the full (unnormalized) embeddings: 
+
+Lc(T ) = L(vA, μc; Pc) + L(vB, μc; Pc). (12) Each proxy μc integrates over all years of category c (Figure 2a). At this stage, date infor-mation may still be present in the embedding through spurious correlations such as textures or color; the subsequent residual construction removes it. 
+
+Direct temporal loss. The year subspace is optimized on the normalized direct residuals: 
+
+Ly
+
+> direct
+
+(T ) = L(ˆrA, μyA ; Py) + L(ˆrB, μyB ; Py). (13) This makes the year subspace estimable , but not yet geometrically consistent across cate-gories. 
+
+Transitive temporal loss. To enforce temporal transitivity (Definition 2), the shifted resid-uals are pulled toward their target year proxies — the year each residual has been displaced toward, rather than the image’s own year: 
+
+Ly
+
+> trans
+
+(T ) = L(ˆrA→B, μyB ; Py) + L(ˆrB→A, μyA ; Py). (14) This cannot be satisfied unless the displacement ky is consistent across all categories — that is, unless the year residuals of any two images from any two categories differ by the same offset in the temporal subspace. This swapping trick directly enforces Definition 2. 
+
+Total year loss and joint objective. Combining direct and transitive terms (Figure 2d): 
+
+Ly(T ) = L(ˆrA, μyA ; Py) + L(ˆrB, μyB ; Py)
+
+| {z } 
+
+> direct: r≈μy
+
++ L(ˆrA→B, μyB ; Py) + L(ˆrB→A, μyA ; Py)
+
+| {z } 
+
+> transitive: r+ky≈μy
+
+. (15) The total minimized loss is: 
+
+L = Lc(T ) + Ly(T ). (16) 
+
+Theorem 1 (Emergent TDIR) . Let Lc and Ly be the proxy loss functions defined over an embedding space Rd . Then: 
+
+Part I (exact case). If I (ε ; c, y) = 0, joint minimization of L = Lc + Ly implies TDIR: 
+
+min  
+
+> θ
+
+Lc + Ly =⇒ p(μc, μy, c, y) = p(μc, c) · p(μy, y) (17) 
+
+Part II (asymptotic case). If I (ε ; c, y)̸ = 0, joint minimization implies asymptotic TDIR: 
+
+min  
+
+> θ
+
+Lc + Ly =⇒ ⟨ μc, μy⟩ → O
+
+ I(ε ; c, y)
+
+∥μy∥2
+
+
+
+∀ c, y (18) 8 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 
+
+Algorithm 1 TDIR Training Loop  
+
+> 1:
+
+Initialize: Pc ∈ RC×d , Py ∈ RY ×d , K ∈ RY ×d 
+
+> 2:
+
+for epoch e = 1 . . . E do  
+
+> 3:
+
+for (xA, xB, c) ∈ D train do  
+
+> 4:
+
+vA ← f (xA); vB ← f (xB) forward pass  
+
+> 5:
+
+Lc ← L (vA, c; Pc) + L(vB, c; Pc) category subspace  
+
+> 6:
+
+rA = vA − μcc ; rB = vB − μcc center by category (decomposable)  
+
+> 7:
+
+rA→B = vA + kB − μcc ; rB→A = vB + kA − μcc swapping trick (transitive)  
+
+> 8:
+
+ˆr∗ ← r∗/∥r∗∥ normalize for angular encoding 
+
+> 9:
+
+Ly = L(ˆrA, μyA ; Py) + L(ˆrB, μyB ; Py) + estimable temporal embedding 
+
++ L(ˆrA→B, μyB ; Py) + L(ˆrB→A, μyA ; Py) transitive temporal embedding  
+
+> 10:
+
+{ f , Pc, Py, K} ← { f , Pc, Py, K} − α∇(Lc + Ly) backward pass  
+
+> 11:
+
+end for  
+
+> 12:
+
+end for 
+
+See proof in Appendix A.4. Note that Proposition 2 states that μy and μc can be learned under the assumption that temporal and categorical centroids are orthogonal. Although this might seem a strong constraint, Theorem 1 shows that the joint optimization of Eq. (16) imposes this orthogonality as an emergent property of the centering and swapping tricks. It is therefore formally guaranteed that Algorithm 1 can yield TDIR in both the ideal and practical case, through an implicit orthogonality regularization arising from the swapping of temporal variables across common object categories. 
+
+3.5 Inference and Composed Historical Image Retrieval 
+
+At inference Ky is discarded. The three retrieval modes (Figure 3) follow directly from the decomposition f (x) = v ≈ μc + μy.
+
+Label-based (Figure 3a). At inference, we construct a database of test embeddings { f (xi)}Ni=1.As in any common embedding-based retrieval, we construct a query vector q ∈ Rd and re-turning its nearest neighbors: 
+
+{x(1), x(2), . . . , x(k)} = top-k
+
+> xi
+
+f (xi)⊤q
+
+∥ f (xi)∥∥ q∥ . (19) By the decomposability property, a query targeting category c at year y is simply the sum of their respective proxies: 
+
+q = μc + μy. (20) Since ⟨μc, μy⟩ = 0, the query lies precisely at the intersection of both subspaces, and the retrieved images {x(i)} are those whose embeddings are simultaneously close to μc and μy
+
+— that is, images of category c from year y.A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 9
+
+pc
+
+> train
+> 1920
+> f
+> 
+> 
+> 1930
+
++py
+
+> 1970
+
+(a) 
+
+> f
+> 
+> 
+> 1970
+> f
+> 
+> 
+> 1930
+
++py
+
+> 1930
+
+(b)    
+
+> f
+> 
+> 
+> 1970
+> f
+> 
+> 
+> 1930
+> +f
+> 
+> −
+
+pc
+
+> face
+
+(c) 
+
+Figure 3: Inference modes. (a) Label-based retrieval via proxy addition. (b) Image-guided retrieval with a target year label. (c) Zero-label retrieval: the year residual of xy is extracted and transplanted onto f (xc).
+
+Image + label (Figure 3b). When the target year y is known but no category label is provided, we replace μc with the actual image embedding: 
+
+q = f (xc) + μy. (21) This is strictly more expressive than the label-based mode: rather than retrieving images close to the category centroid μc, the query anchors to the instance-specific content of xc
+
+— including the ε residual — while the year direction is fully determined by μy. Retrieved images thus share the particular visual characteristics of xc, translated to year y.
+
+Image + image, zero-label (Figure 3c) The most powerful inference mode requires no label information whatsoever. The user provides two images: a category image x c — whose year is entirely unknown and irrelevant — and a temporal reference x y, from which we wish to borrow the year. 
+
+Step 1: Infer the category of xy. Since no category label is provided, we assign xy to its nearest category proxy: ˆc = arg min 
+
+> c′
+
+∥ f (xy) − μc′
+
+∥2. (22) 
+
+Step 2: Extract the temporal information Subtracting the inferred category proxy strips the category information from f (xy), leaving a category-agnostic vector: 
+
+ry = f (xy) − μ ˆc ≈ μy + ε, (23) where μy is the (unknown to the user) year proxy and ε is the instance-specific residual. Crucially, neither μy nor the year of xy need to be known — the vector ry is the temporal information. 
+
+Step 3: Temporal transplant. We add ry to the category embedding of xc:
+
+q = f (xc) + ry. (24) By temporal transitivity (Definition 2), this displaces f (xc) along the temporal manifold toward the year of xy, while preserving its category direction. The k-nearest neighbors of q
+
+are thus images of the same category as xc, at the same period as xy.10 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL       
+
+> 1930s 1940s 1950s 1960s 1970s 1980s 1990s
+> Jacket
+> Poster
+> Car
+> Building
+
+Table 1: Example images and categories from the dataset. 
+
+## 4 Experimental Set-Up 
+
+4.1 Dataset 
+
+For the correct application and benchmarking of our proposed problem set-up, it is for us required to utilize a dataset where both the date and object annotations are available. For doing so, we take advantage of the Date Estimation in The Wild dataset (DEW) [19] with object-specific detections by using the same criteria as in [22]. In this Section, we detail the dataset and how it differs from the original DEW images. 
+
+DEW Dataset The Date Estimation in The Wild dataset contains 1M natural-scene pho-tographs from 1930 to 1999, the date information has an excellent granularity of a year per photo. However, the images are natural scenes and, therefore, contain a variety of different objects which hinders the applicability of object-specific representations. 
+
+Object-Centric DEW Dataset In [22], the authors propose a detection pipeline to crop objects detected with a minimum 10000px resolution by using the DETR [4] model. Al-though the object-level detection (bounding boxes) are publicly available, we note that the authors use a constrained set of 6 categories, which in our case could trivialize the object-sensitive subspace. 
+
+Proposed Dataset To solve the aforementioned issue, we use the same resolution cri-teria, but utilize OWLv2 [14] to detect objects from all possible categories in the DETR 
+
+HuggingFace implementation [9] with a 30% detection threshold 1. This leads us to 7,239,083 object detections of medium-to-high resolution of 586 objects and date-specific annotations from DEW (see Table 1). In this article we will focus on the sub-set of top-50 most predominant objects and 4,478,887 detections (see Appendix C). But the complete set of detections, which can be utilized to expand the presented method or for many other appli-cations, is available to download 2. The test partition follows the same image selection as the original DEW dataset, from which we separate the detections according to the image source.        
+
+> 1This is a standard threshold when using OWL [10].
+> 2Contact amolina@cvc.uab.cat with the string “ [TDIR] -Access to the database ” as subject. A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 11
+
+Table 2: Comparison across backbone architectures and the CLIP baseline (K=10). 
+
+Label+Label Image+Label Image+Image Backbone Obj. P@ K
+
+Date P@ K
+
+Obj. P@ K
+
+Date P@ K
+
+Obj. P@ K
+
+Date P@ K
+
+CLIP (arithmetic, see Appendix D.1) .152 .115 .387 .076 .389 .102 CLIP (prompting, see Appendix D.2) .415 .105 .372 .079 .520 .081 VGG + TDIR .397 .712 .388 .579 .669 .234 ResNet + TDIR .489 .803 .444 .665 .721 .306 ConvNeXt + TDIR .443 .824 .416 .664 .725 .393 ViT + TDIR .413 .863 .355 .708 .646 .429 
+
+4.2 Implementation Details 
+
+The practical implementation of the Temporally Decomposable Image Representations has been evaluated using several backbone architectures in order to assess the robustness of the proposed methodology across both convolutional and transformer-based visual representa-tions. In particular, experiments have been conducted with ConvNeXt-Base [13], Vision Transformer B/32 (ViT-B/32) [6], ResNet50 [8], and VGG19-BN [31], all initialized with 
+
+ImageNet pre-trained weights [5] using the official PyTorch implementations [26]. For all ar-chitectures, the original classification head was removed and replaced with a projection layer producing a fixed embedding dimension of 1024. This unified embedding size ensures a fair comparison between architectures and allows all models to operate under the same metric-learning framework. Unlike previous approaches proposed for solving the DEW dataset [19] in an object-centric manner [22], which requires ensembles of specialized models for each semantic category, the proposed methodology employs a single unified backbone capable of handling all categories jointly. This significantly scales well with the number of object categories. All backbone architectures were trained using the same optimization setup to ensure experimental consistency. The AdamW optimizer jointly optimizes the backbone pa-rameters, the learnable category proxies, and the auxiliary temporal embeddings ( f , μ∗, and 
+
+ky) with a learning rate of 10 −4 during 10 epochs, using the ProxyNCALoss proposed by Movshovitz-Attias et al. [18] via the Pytorch-Metric-Learning library [20], with no explicit triplet mining. Training was conducted on a single NVIDIA A40 GPU. Due to the large number of object detections (approximately 4M cropped sub-images across 50 object categories), each epoch requires approximately 15 hours of computation, with GPU utiliza-tion analysis confirming that the available resources are fully saturated throughout training. 
+
+4.3 Evaluation Protocol 
+
+We evaluate each of the three inference modes (Section 3.5) using a unified set of metrics built around two axes: categorical fidelity (does retrieval respect the object class?) and 
+
+temporal fidelity (does retrieval respect the target date?). As a standard practice in date estimation [19, 23], we consider a correct date classification whenever the retrieved date is within the same lustrum (5 years period). For each inference mode, we retrieve the top-K images for every valid query and report 12 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 
+
+two complementary precision metrics: 
+
+Object Precision@ K : #{xi : ci = c}
+
+K , (25) 
+
+Date Precision@ K : #{xi : yi ≈ y}
+
+K , (26) where yi ≈ y denotes temporal correctness within the same lustrum (5-year window). Given that the DEW dataset contains images from 1930-1999, the random baseline is settled at 100 × 170 /5 = 7.14% chance of returning a correctly classified image in terms of the date estimation. In the label-based mode, c and y are taken directly from the query labels; in the image-based modes, c is determined by c(xc) and y by the target year or the transferred residual ry (see Section 3.5). 
+
+## 5 Results 
+
+In this section, we present an exhaustive evaluation of our framework in a highly applied setup. First, in Table 2, we compare several widely used Computer Vision backbones against two CLIP baselines for reference (see Appendix D for the baselines implementation). We observe that our proposed approach follows the general trends observed in computer vision, with ConvNeXt and ViT emerging as the top-performing and overall comparable architec-tures. The CLIP baselines prove to be competitive on retrieving the correct category, but are not sufficiently sensitive to temporal information despite its demonstrated sensitivity to image dates in [32] and [3]. Table 3 presents an ablation study. A key observation from the experiment is that the pro-posed swapping trick not only improves transitivity, as expected, but also leads to better date and object embedding subspaces. This is reflected in the improved performance observed not only for image-based queries but also for purely label-based inference, which does not rely on any transitive property induced by injecting a date into a temporal embedding. This obser-vation partially supports the claim in Corollary 4 presented in Appendix A.4, heavily relies on the inclusion of a swapping term and states that this combination of losses imposes an implicit orthogonality regularization at the optimum. The inclusion of an auxiliary term ( k∗), instead of directly using the temporal proxy itself ( μy 
+
+> ∗
+
+) in the swapping trick step, plays an important role in Image+Image inference, yielding significant gains in properly structuring the embedding space. However, when performing Image+Label inference, only a marginal performance gap is observed, likely due to the train–test mismatch at inference time caused 
+
+Label+Label Image+Label Image+Image Swap Aux Norm Obj. P@ K
+
+Date P@ K
+
+Obj. P@ K
+
+Date P@ K
+
+Obj. P@ K
+
+Date P@ K
+
+✗ ✓ ✓ .362 .712 .342 .568 .683 .358 
+
+✓ ✗ ✓ .355 .822 .343 .676 .691 .354 
+
+✓ ✓ ✗ .358 .816 .349 .675 .708 .362 
+
+✓ ✓ ✓ .443 .824 .416 .664 .725 .393 
+
+Table 3: Ablation study (K=10, ConvNext ) for our method including the usage of the swapping trick, auxiliary proxies and normalization of the temporal component. A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 13 1930 1935 1940 1945 1950 1955 1960 1965 1970 1975 1980 1985 1990 1995 0.00 0.20 0.40 0.60 0.80 1.00    
+
+> Object Accuracy
+> 1930 1935 1940 1945 1950 1955 1960 1965 1970 1975 1980 1985 1990 1995 0.00 0.20 0.40 0.60 0.80 1.00
+> Two-Image Translation Object Accuracy
+> 0510 15 20 25 30 35 40 45 50 55 60 65 0.00 0.20 0.40 0.60 0.80 1.00
+> 1930 1935 1940 1945 1950 1955 1960 1965 1970 1975 1980 1985 1990 1995
+> Source image year
+> 0.0 2.5 5.0 7.5 10.0 12.5 15.0 17.5
+> Year MAE (calendar years)
+> 1930 1935 1940 1945 1950 1955 1960 1965 1970 1975 1980 1985 1990 1995
+> Target (reference) image year
+> 0.0 5.0 10.0 15.0 20.0 25.0 30.0 35.0
+> Two-Image Translation Year MAE
+> 0510 15 20 25 30 35 40 45 50 55 60 65
+> |Source Target| (years)
+> 0.0 5.0 10.0 15.0 20.0 25.0
+
+Figure 4: Calibration error bars when using query-by-examples year injection. by relying exclusively on the learned centroids ( μy
+
+∗ ). Lastly, the normalization of the tem-poral component appears to be the least impactful, although it provides a slight performance boost in Image+Image date estimation. Curiously, performance in the Label+Label object retrieval setup is maximized if and only if all three components are present in the training regime. Figure 4 reports object and date precision as a function of source year, target year, and their absolute difference. Object precision remains stable across all three axes, confirm-ing that temporal transplantation does not corrupt the categorical content of the query: the category subspace is effectively insulated from the temporal injection. Date precision, by contrast, reveals a clear dependency on the target year and on the source-to-target gap, but notably not on the source year itself. This asymmetry rules out a straightforward directional explanation: if the error were caused by the displacement vector μy acting unidirectionally, pushing representations forward or backward in time indiscriminately, one would expect a monotonic pattern with respect to direction. Instead, the error follows a U-shaped curve over the target year axis, with decades at the extremes of the temporal range being harder to reach regardless of where the source lies. Furthermore, precision degrades consistently as the temporal gap widens, suggesting that the optimisation does not perfectly generalise large temporal displacements. Taken together, these findings indicate that the current ad-ditive translation mechanism, while effective at short and moderate temporal distances, is an approximation whose fidelity diminishes with displacement magnitude. A natural direc-tion for future work is to replace the additive operator with a more expressive, potentially non-linear mechanism capable of modelling large temporal jumps more faithfully. Although the numerical results may appear modest, a qualitative inspection in Table 4 reveals that the method generally behaves as expected. While errors in the predicted years are present, they mostly correspond to inaccuracies within the same lustrum rather than se-vere temporal artifacts (see Appendix C for a detailed analysis). This behavior may stem from two limitations. First, the temporal subspace is constrained to be object-agnostic, thus enforcing the same temporal displacement across all object categories. As introduced in Sec-14 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 
+
+Category Date Top-1 Top-2 Top-3 Top-4 Top-5 Top-6 
+
+Poster 1975 
+
+1980 
+
+Table 4: Qualitative results with category error and temporal error. tion 1, not every object evolves at the same pace, which may inherently limit the achievable performance under this design choice. In many cases, such as the fourth row, the temporal transplant is qualitatively correct, but the retrieved samples exhibit category ambiguity due to images lying near the boundary between two classes. In that example, the target category is “poster”, yet images belonging to the “men” category are retrieved while still exhibiting the correct temporal attribution. As discussed, the error tends to increase with temporal dis-tance, which can be observed in the fifth row, where the direction of the temporal shift is correct but the magnitude of the displacement is insufficient. Lastly, in some cases, such as the final row, the target category may simply contain too few old samples in the database because the object itself is inherently modern. As a result, the retrieved samples belong to the correct category but remain more recent than desired. 
+
+## 6 Conclusions 
+
+In this paper, we have presented TDIR, a representation learning framework that formalises the decomposition of historical image embeddings into orthogonal temporal and categorical subspaces. We have established the theoretical conditions under which such a decomposi-tion holds, proved that the required orthogonality emerges naturally from joint optimisation, and characterised the error incurred when those conditions are only partially met. To our knowledge, this constitutes the first formal treatment of temporal decomposability in visual embeddings, addressing a limitation of prior work that either observes temporal structure post-hoc or exploits it implicitly without a principled formulation. Beyond the theoretical A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 15 
+
+contributions, we have grounded the framework in the novel problem of Composed Histori-cal Image Retrieval, where a query simultaneously specifies object content and a target time period. This setting reflects a natural and practically relevant archival task, yet no existing benchmark supported its evaluation. We address this by extending the DEW dataset with object-level detections across 50 categories, enabling the first evaluation of compositional retrieval over a diverse photographic archive covering seven decades. Limitations include the assumption of a shared temporal displacement across all object categories, which may not reflect the uneven pace at which different objects evolve histori-cally, and the use of an additive transplantation operator whose fidelity diminishes at large temporal distances. Future work will explore non-linear temporal operators and category-specific temporal subspaces, as well as the extension of the benchmark to support zero-shot evaluation over unseen object categories. 
+
+## Acknowledgments 
+
+> This work has been partially supported by the Spanish project PID2024-157778OB-I00, Ministerio de Ciencia e Innovación, the Departament de Cultura of the Generalitat de Catalunya, and the CERCA Program. Adrià Molina is funded with the PRE2022-101575 grant provided by MCIN / AEI / 10.13039 / 501100011033 and by ERDF/EU.
+
+16 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 
+
+## References 
+
+[1] Archives Nationales, France. Corpus de documents numérisés des Archives Nationales. https://www.data.gouv.fr/datasets/ corpus-de-documents-numerises-des-archives-nationales . Last visited: May 18, 2026. [2] Shota Ashida, Adam Jatowt, Antoine Doucet, and Masatoshi Yoshikawa. Determining image age with rank-consistent ordinal classification and object-centered ensemble. In Proceedings of the 2nd ACM International Conference on Multimedia in Asia , pages 1–8, 2021. [3] Alexandra Barancová, Melvin Wevers, and Nanne van Noord. Blind dates: examining the expression of temporality in historical photographs. arXiv preprint arXiv:2310.06633 , 2023. [4] Nicolas Carion, Francisco Massa, Gabriel Synnaeve, Nicolas Usunier, Alexander Kirillov, and Sergey Zagoruyko. End-to-end object detection with transformers. In European conference on computer vision ,pages 213–229. Springer, 2020. [5] Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li Fei-Fei. Imagenet: A large-scale hierarchical image database. In 2009 IEEE conference on computer vision and pattern recognition , pages 248–255. Ieee, 2009. [6] Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Un-terthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, et al. An image is worth 16x16 words: Transformers for image recognition at scale. arXiv preprint arXiv:2010.11929 , 2020. [7] Noa Garcia, Benjamin Renoust, and Yuta Nakashima. Contextnet: representation and exploration for painting classification and retrieval in context. International Journal of Multimedia Information Retrieval , 9(1):17–30, 2020. [8] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In 
+
+Proceedings of the IEEE conference on computer vision and pattern recognition , pages 770–778, 2016. [9] Hugging Face. Detr. https://huggingface.co/docs/transformers/en/model_doc/detr ,2026. Transformers documentation. Last visited: 2026-05-18. [10] Hugging Face. Owl-vit. https://huggingface.co/docs/transformers/model_doc/ owlvit , 2026. Transformers documentation. Last visited: 2026-05-18. [11] Gabriel Ilharco, Mitchell Wortsman, Ross Wightman, Cade Gordon, Nicholas Carlini, Rohan Taori, Achal Dave, Vaishaal Shankar, Hongseok Namkoong, John Miller, Hannaneh Hajishirzi, Ali Farhadi, and Ludwig Schmidt. Openclip, July 2021. URL https://doi.org/10.5281/zenodo.5143773 . If you use this software, please cite it as below. [12] Library of Congress. Library of Congress – Global Search. https://www.loc.gov/search/?all= true . Last visited: May 18, 2026. [13] Zhuang Liu, Hanzi Mao, Chao-Yuan Wu, Christoph Feichtenhofer, Trevor Darrell, and Saining Xie. A convnet for the 2020s. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , pages 11976–11986, 2022. [14] Matthias Minderer, Alexey Gritsenko, and Neil Houlsby. Scaling open-vocabulary object detection. Advances in Neural Information Processing Systems , 36:72983–73007, 2023. [15] Ministerio de Cultura, España. PARES: Portal de Archivos Españoles – Estadísticas. https://pares. cultura.gob.es/estadisticas.html . Last visited: May 18, 2026. [16] Ministerio de Cultura, España. Anuario de Estadísticas Culturales 2025. https:// www.cultura.gob.es/dam/jcr:daa6c0f8-9abb-48a8-8af3-7d54746d6e4a/ anuario-de-estadisticas-culturales-2025.pdf , 2025. p. 319. Last visited: May 18, 2026. A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 17 
+
+[17] Adrià Molina, Lluis Gomez, Oriol Ramos Terrades, and Josep Lladós. A generic image retrieval method for date estimation of historical document collections. In International Workshop on Document Analysis Systems ,pages 583–597. Springer, 2022. [18] Yair Movshovitz-Attias, Alexander Toshev, Thomas K Leung, Sergey Ioffe, and Saurabh Singh. No fuss distance metric learning using proxies. In Proceedings of the IEEE international conference on computer vision , pages 360–368, 2017. [19] Eric Müller, Matthias Springstein, and Ralph Ewerth. “when was this picture taken?”–image date estimation in the wild. In European Conference on Information Retrieval , pages 619–625. Springer, 2017. [20] Kevin Musgrave, Serge Belongie, and Ser-Nam Lim. A metric learning reality check. In European Conference on Computer Vision , pages 681–699. Springer, 2020. [21] Francesc Net and Lluis Gomez. Eufcc-cir: A composed image retrieval dataset for glam collections. In 
+
+European Conference on Computer Vision , pages 196–211. Springer, 2024. [22] Francesc Net, Núria Hernández, Adriá Molina, and Lluis Gómez. A transformer-based object-centric ap-proach for date estimation of historical photographs. In European Conference on Information Retrieval ,pages 137–150. Springer, 2024. [23] Frank Palermo, James Hays, and Alexei A Efros. Dating historical color images. In European Conference on Computer Vision , pages 499–512. Springer, 2012. [24] Jakub Paplhám and Vojtˇ ech Franc. Photo dating by facial age aggregation. In Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision , pages 8103–8112, 2026. [25] Trudy Huskamp Peterson. The Probative Value of Archival Documents . Swisspeace Bern, 2014. [26] PyTorch Contributors. Torchvision models documentation. https://docs.pytorch.org/vision/ main/models.html , 2026. Accessed: 2026-05-11. [27] Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, et al. Learning transferable visual models from natural language supervision. In International conference on machine learning , pages 8748–8763. PmLR, 2021. [28] Arijit Ray, Filip Radenovic, Abhimanyu Dubey, Bryan Plummer, Ranjay Krishna, and Kate Saenko. Cola: A benchmark for compositional text-to-image retrieval. Advances in Neural Information Processing Systems ,36:46433–46445, 2023. [29] Tawfiq Salem, Scott Workman, Menghua Zhai, and Nathan Jacobs. Analyzing human appearance as a cue for dating images. In 2016 IEEE Winter Conference on Applications of Computer Vision (WACV) , pages 1–8. IEEE, 2016. [30] C. et al. Schuhmann. Laion-5b: An open large-scale dataset for training next generation image-text models. In Advances in Neural Information Processing Systems , 2022. [31] Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. 
+
+arXiv preprint arXiv:1409.1556 , 2014. [32] Ankit Sonthalia, Arnas Uselis, and Seong Joon Oh. On the rankability of visual embeddings. Advances in Neural Information Processing Systems , 38:66169–66203, 2026. [33] Lorenzo Stacchio, Alessia Angeli, Giuseppe Lisanti, Daniela Calanca, and Gustavo Marfia. Imago: A family photo album dataset for a socio-historical analysis of the twentieth century. arXiv preprint arXiv:2012.01955 ,2020. [34] Hui Wu, Yupeng Gao, Xiaoxiao Guo, Ziad Al-Halah, Steven Rennie, Kristen Grauman, and Rogerio Feris. Fashion iq: A new dataset towards retrieving images by natural language feedback. In Proceedings of the IEEE/CVF Conference on computer vision and pattern recognition , pages 11307–11317, 2021. [35] Hua Yuan, Yuhan Li, Baohui Wang, Kaixuan Liu, and Junjie Zhang. Knowledge graph-based intelligent question answering system for ancient chinese costume heritage. npj Heritage Science , 13(1):198, 2025. 18 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 
+
+## Supplementary Material 
+
+This document contains the supplementary material for the BMVC submission: 
+
+Composed Historical Image Retrieval by Modeling Temporal Representations 
+
+The supplementary material is organized as follows: 
+
+Section Content 
+
+A Derivations and Demonstrations B Photographic Material Calculation C Object-Centric Analysis D CLIP Baselines E Frequently Asked Questions (FAQs) The following sections provide theoretical derivations, empirical analyses, and additional experimental details supporting the main manuscript. A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 19 
+
+## A Derivations for Decomposable Representations 
+
+A.1 Chain rule of mutual information 
+
+Because the following derivations will heavily rely on rearranging terms in equalities us-ing the chain rule, let us consider the definition on a general setting, using three random variables: A, B, and C.The chain rule of mutual information states that: 
+
+I(A,C; B) = I(A; B) + I(C; B | A) (27) Intuitively, this means that the information that the joint representation (A,C) carries about B can be decomposed into the information provided by A, plus the additional informa-tion provided by C, after conditioning on A.
+
+A.2 Temporally Decomposable Image Representations (TDIR) 
+
+As expressed in the main corpus of the manuscript, we note that category and year classes are decomposable as a design choice, which means that the expression in Definition 1 
+
+p(μc, c, μy, y) = p(μc, c) p(μy, y) (28) is satisfied. In short, the class centroids are distributed with no influence from the date information and vice-versa. 
+
+Proposition 3 (Temporally Decomposable Image Representation) . Under the model as-sumptions of Definition 1, we note that the following equality for the image representation holds: I(μc, μy; c, y) = I(μc; c) + I(μy; y) (29) 
+
+Proof. We apply the chain rule for mutual information to decompose the left-hand side: 
+
+I(μc, μy; c, y) = I(μc; c, y)
+
+| {z }
+
+> first term
+
++ I(μy; c, y | μc)
+
+| {z }
+
+> second term
+
+(30) We apply again the chain rule to I(μc; c, y):
+
+I(μc; c, y) = I(μc; c) + I(μc; y | c) (31) From Definition 1, the category centroid does not provide information about the date of the image, therefore it does not provide information when conditioned on the category itself: 
+
+I(μc; c, y) = I(μc; c) +  
+
+I(μc; y | c) = I(μc; c) (32) Hence the first term simplifies to I(μc; c) if and only if the model assumption ( μc ⊥ y | c)holds. Similarly, the term I(μy; c, y | μc) is expanded again by applying the chain rule of conditional mutual information: 
+
+I(μy; c, y | μc) = I(μy; c | μc) + I(μy; y | μc, c) (33) 20 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 
+
+From the Markov structure that emerges from Eq. (28), 
+
+μc → c and μy → y, (34) together with the independence assumption μy ⊥ (μc, c), it follows that 
+
+I(μy; c | μc) = 0, (35) and conditioning on (μc, c) does not affect the dependence between μy and y, yielding 
+
+I(μy; y | μc, c) = I(μy; y). (36) Therefore, 
+
+I(μy; c, y | μc) = I(μy; y). (37) Combining the results in Equations (32) and (33): 
+
+I(μc, μy; c, y) = I(μc; c, y)
+
+| {z } 
+
+> I(μc;c)+ 0
+
++ I(μy; c, y | μc)
+
+| {z } 
+
+> I(μy;y)
+
+= I(μc; c) + I(μy; y) (38) which holds if and only if the initial assumption in Eq. (28) is satisfied. 
+
+Lemma 2 (Orthogonality of Centroid Subspaces) . Under Definition 1, the category and temporal centroids are orthogonal: 
+
+Cov (μc, μy) = 0, (39) 
+
+and the total representational variance decomposes as 
+
+Var (μc + μy) = Var (μc) + Var (μy). (40) 
+
+Proof. By Definition 1, marginalising over (c, y) and applying Fubini’s theorem: 
+
+p(μc, μy) = 
+
+Z Z 
+
+p(μc, c) · p(μy, y) dc dy =
+
+Z
+
+p(μc, c) dc 
+
+| {z }
+
+> p(μc)
+
+·
+
+Z
+
+p(μy, y) dy 
+
+| {z }
+
+> p(μy)
+
+= p(μc) · p(μy),
+
+(41) so μc ⊥ μy. Independence implies Cov (μc, μy) = 0, and the variance decomposition follows immediately from the bilinearity of covariance. 
+
+A.3 Estimating the error in real scenarios 
+
+Because the total independence μc ⊥ μy (Lemma 2) cannot be guaranteed in practical terms, where data might contain severe spurious correlations, one must account for the incorpora-tion of a noise vector ε ∈ Rd which entangles both year and category information: 
+
+v = f (x) = μc + μy + ε and I(ε; c, y)̸ = 0 (42) Our model assumption is that epsilon can emerge due to correlation on the training data (hence, the labels y and c) but that an independent proxy vector can be learnt despite this entanglement 3:
+
+ε ⊥ (μc, μy) (43)         
+
+> 3With this, we do not negate the presence of noise and spurious correlations on the training; εcan heavily depend on the target labels, but one can impose a model restriction where μcand μyare learned to be orthogonal vectors. A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 21
+
+Proposition 4 (Practical Learnability of TDIRs) . Under the TDIR framework, the discrep-ancy term δ ≜ I(ε; c, y) depends only on the statistical structure of the training data and not on the choice of proxy vectors μc or μy.I(v; c, y) ≤ I(μc; c) + I(μy; y) + δ where δ ≜ I(ε; c, y) (44) 
+
+Consequently, δ constitutes a data-dependent constant with respect to the optimization, and the category and year centroids can be learned freely to satisfy the orthogonality constraint 
+
+⟨μc, μy⟩ = 0 without affecting this error bound. Proof. The real mutual information expression entangles ε with the label variables: 
+
+I(μc, μy, ε; c, y) = I(μc, μy; c, y) + I(ε; μc, μy | c, y) (45) Because the model is assumed to be trained under an independence condition ε ⊥ (μc, μy),
+
+I(ε; μc, μy | c, y) = I(ε; μc, μy) (46) Therefore, 
+
+I(μc, μy, ε; c, y) = I(μc, μy; c, y)
+
+| {z }  
+
+> I(μc;c)+ I(μy;y)
+
++I(ε; μc, μy) (47) To obtain the total expression for I(v; c, y), we apply the chain rule of mutual information :
+
+I( v|{z} 
+
+> A
+
+, μc, μy, ε
+
+| {z }
+
+> C
+
+; c, y
+
+|{z} 
+
+> B
+
+) = I(v; c, y) + I(μc, μy, ε; c, y | v) (48) Since v = μc + μy + ε is a function of (μc, μy, ε), the joint tuple (v, μc, μy, ε) carries no more information about (c, y) than (μc, μy, ε) alone: 
+
+I(v, μc, μy, ε; c, y) = I(μc, μy, ε; c, y) (49) Isolating I(v; c, y):
+
+I(v; c, y) = I(μc, μy, ε; c, y) − I(μc, μy, ε; c, y | v) (50) Substituting the expression in Eq. (50): 
+
+I(v; c, y) = I(μc; c) + I(μy; y) + I(ε; c, y) − I(μc, μy, ε; c, y | v) (51) where the last term I(μc, μy, ε; c, y | v) represents the information lost by collapsing the three components into a single vector v. Identifying δ :
+
+δ = I(ε; c, y) − I(μc, μy, ε; c, y | v)
+
+| {z } 
+
+> ≥0
+
+(52) we can rewrite the exact relation compactly as: 
+
+I(v; c, y) = I(μc; c) + I(μy; y) + δ|{z}   
+
+> ≤I(ε;c,y)
+
+(53) 22 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 
+
+μc ε μy
+
+c v y                       
+
+> p(c|μc)p(y|μy)
+> category centroid noise temporal centroid category representation year ⊥⊥
+> v=μc+μy+εlatent observed
+> p(v|μc)p(v|μy)
+
+Figure 5: Resulting graphical model from Proposition 2 Since mutual information is always non-negative , δ ≤ I(ε; c, y) provides an upper bound. To obtain a more precise approximation of δ , we expand I(ε; c, y) via the chain rule: 
+
+I(ε; c, y) = I(ε; c) + I(ε; y | c) (54) Under the assumption that category c and year y are independent, I(ε; y | c) ≈ I(ε; y), giving: 
+
+δ ≤ I(ε; c) + I(ε; y) (55) This shows that δ is controlled by how much the noise ε leaks information about each label separately. If the model successfully disentangles μc and μy from ε, both terms vanish and δ → 0, recovering the ideal case: 
+
+I(v; c, y) ≈ I(μc; c) + I(μy; y) (56) Thus, under the assumption that such orthogonal centroids can be learned (see Figure 5), the ideal mutual information equality in the practical case is consistent with the TDIR proposi-tion up to an upper bound δ characterized by the entanglement of training data. The joint optimization of Lc and Ly implicitly enforces the orthogonality condition 
+
+⟨μc, μy⟩ = 0 required by the TDIR definition, without imposing it as an explicit constraint. The proof relies on a preliminary result about the structure of the year proxies, which we establish first. A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 23 
+
+A.4 TDIR as an Emergent Property of the Joint Loss 
+
+With all the properties and propositions derived above, we can then state that the following theorem holds: 
+
+Theorem 3 (Emergent TDIR) . Let Lc and Ly be the proxy loss functions defined over an embedding space Rd . Then: 
+
+Part I (exact case). If I (ε ; c, y) = 0, joint minimization of L = Lc + Ly implies TDIR: 
+
+min  
+
+> θ
+
+Lc + Ly =⇒ p(μc, μy, c, y) = p(μc, c) · p(μy, y) (57) 
+
+Part II (asymptotic case). If I (ε ; c, y)̸ = 0, joint minimization implies asymptotic TDIR: 
+
+min  
+
+> θ
+
+Lc + Ly =⇒ ⟨ μc, μy⟩ → O
+
+ I(ε ; c, y)
+
+∥μy∥2
+
+
+
+∀ c, y (58) 
+
+Proof. Part I: I(ε ; c, y) = 0 =⇒ TDIR. 
+
+The category proxy loss is minimized when the score v⊤μc is maximal and uniform across all years. Since vcA = μc + μyA and vcB = μc + μyB share the same category but differ in year, the minimum requires: 
+
+v⊤ 
+
+> A
+
+μc = v⊤ 
+
+> B
+
+μc ∀ yA, yB =⇒ ⟨ μyA , μc⟩ = ⟨μyB , μc⟩ ∀ yA, yB
+
+hence I(μc ; y) = 0. For the temporal loss, the shared displacement vectors ky impose, for any two categories c̸ = c′ sharing the same years: 
+
+rcA + kyB ≈ μyB , rc′ 
+
+> A
+
++ kyB ≈ μyB
+
+Subtracting yields rcA ≈ rc′ 
+
+> A
+
+, so the score rcA⊤μy is independent of the category, hence I(μy ; c) = 
+
+0. Applying the chain rule of mutual information: 
+
+I(μc, μy ; c, y) = I(μc ; c) + I(μy ; c | μc)
+
+| {z } 
+
+> =0
+
++ I(μc ; y | μy, c)
+
+| {z } 
+
+> =0
+
++I(μy ; y) = I(μc ; c) + I(μy ; y)
+
+This equality is equivalent, via the KL divergence and Fubini’s theorem, to the factorization 
+
+p(μc, μy, c, y) = p(μc, c) · p(μy, y).
+
+Part II: I(ε ; c, y)̸ = 0 =⇒ asymptotic TDIR. 
+
+The proxy loss L(u, μ∗; P) = − log σ (u⊤μ∗) is a softmax cross-entropy, which is smooth and strictly convex in a neighborhood of its minimum. A second-order Taylor expansion around the minimizer yields a local quadratic approximation of the form ∥u− μ∗∥2 +O(∥u−
+
+μ∗∥3). We therefore adopt the squared-error surrogates as a standard local approximation: 
+
+Lc(T ) ∝ ∥vA − μc∥2 + ∥vB − μc∥2, (59) 
+
+Ly(T ) ∝ ∥ˆrA − μyA ∥2 + ∥ˆrB − μyB ∥2 + ∥ˆrA→B − μyB ∥2 + ∥ˆrB→A − μyA ∥2. (60) This approximation is tight near convergence, where embeddings cluster around their re-spective proxies, and the conclusions below hold to the same asymptotic order as the Taylor remainder. 24 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 
+
+Decompose μc over the temporal subspace as μc = ˜μc + α μ yA + β μ yB with ˜ μc ⊥ μy.Under v = μc + μy + ε, the year residuals are: 
+
+rcA = ( 1 − α)μyA − β μ yB + εcA, rcB = ( 1 − β )μyB − α μ yA + εcB
+
+Substituting into the loss surrogates to Ly and expanding: 
+
+Ly ∝ + ∥εcA∥2 + ∥εcB∥2 − 2α⟨μyA , εcA + εcB⟩ − 2β ⟨μyB , εcA + εcB⟩++ 2α2∥μyA ∥2 + 2β 2∥μyB ∥2 + 4αβ ⟨μyA , μyB ⟩
+
+| {z } 
+
+> Q(α,β)≥0
+
+The quadratic form Q(α, β ) is positive semidefinite by Cauchy-Schwarz. The cross terms displace the minimum from (0, 0) to: 
+
+α∗ = ⟨μyA , εcA + εcB⟩
+
+2∥μyA ∥2 + O(ε2), β ∗ = ⟨μyB , εcA + εcB⟩
+
+2∥μyB ∥2 + O(ε2)
+
+For small correlations, the covariance between ε and μy satisfies Cov (ε, μy) ≈ ∥ ε∥ · ∥ μy∥ · p2 I(ε ; c, y), which gives: 
+
+⟨μc, μy⟩ = α∗∥μy∥2 + O(ε2) = O
+
+ I(ε ; c, y)
+
+∥μy∥2
+
+
+
+Global consistency follows from the shared ky: a single kyB cannot simultaneously compen-sate projections α̸ = α′ across categories unless (α − α′)μyA = εc′ 
+
+> A
+
+− εcA, which cannot hold for all category pairs since ε is not a control variable of the optimizer. The unique globally consistent solution is therefore: 
+
+⟨μc, μy⟩ → O
+
+ I(ε ; c, y)
+
+∥μy∥2
+
+
+
+∀ c, y
+
+Corollary 4 (Swapping Trick Enforces Cross-Category Orthogonality) . Under the condi-tions of Theorem 3, the shared displacement vectors k y enforce ⟨μc, μy⟩ → 0 uniformly across all categories. Since the same k yB is used when translating residuals from any category, satisfying the swapping constraint simultaneously for two categories c ̸ = c′ with residual projections α̸ =
+
+α′ onto μy would require: 
+
+(α − α′) μyA = εc′ 
+
+> A
+
+− εcA ∀ c, c′. (61) 
+
+This cannot hold globally, since ε is not a control variable of the optimizer. The unique globally consistent solution is therefore α = α′ = 0 for all c , c′, giving: 
+
+Proj μy (μc) → 0 ∀ c, y. (62) 
+
+## B Photographic material calculation 
+
+To estimate the proportion of photographic material in large archival collections, we sur-veyed three major public archives. A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 25 
+
+Archives Nationales (France). Using the publicly available digitisation corpus dataset [1], a small available sample drawn from the 2025 digitisation batch was analysed. Of the total documents, 123 were non-textual, representing 23% of the sample (123 /0.23 ≈ 535 docu-ments in total). Among those non-textual items, 68 were strictly photographic, accounting for approximately 13% of the full sample. 
+
+Library of Congress (USA). The collection can be divided into digitised and non-digitised holdings [12]. Among the non-digitised material, the catalogue lists 16M books, 3M news-papers, 1M periodicals, 0.5M manuscripts, 1.3M photographic and pictorial items, and 450M audiovisual items. Among the digitised material, it lists 3M newspapers, 0.7M books, 0.5M manuscripts, 0.5M periodicals, and 1.2M photographs. Focusing on the textual-adjacent holdings (i.e. excluding the bulk audiovisual collection, which is a category of its own), photographic material represents: 1.3 + 1.216 + 3 + 1 + 0.5 + 1.3 + 3 + 0.7 + 0.5 + 0.5 + 1.2 ≈ 2.527 .7 ≈ 9%.
+
+Portal de Archivos Españoles (Spain). The portal reports approximately 40 million dig-ital objects in total [15]. According to [16], roughly 2 million of these are classified as photographic objects (excluding videos, posters, and other non-textual formats), yielding a photographic fraction of approximately 2 /40 = 5%. 
+
+## C Object-Centric Analysis 
+
+The per-object analysis reveals two complementary sources of error in the composed re-trieval framework, illustrated in Figure 6. When considering the reference image (the image from which temporal information is extracted), objects with low Year MAE such as tires, shorts, glasses, and human faces act as reliable temporal vessels: their embeddings carry a strong and unambiguous date signal, suggesting minimal entanglement between their cat-egorical and temporal subspaces. Conversely, objects such as wheels, vehicle registration plates, dresses, buildings, and men exhibit higher reference error, indicating that their visual representations encode date information less cleanly, likely due to higher intra-class visual variance across decades. On the target side (the object whose category should be preserved after temporal transplantation), objects like posters, girls, trains, houses, and dresses are retrieved with relatively low temporal error, while ladders, human faces, tires, wheels, and hats show the highest MAE. This asymmetry suggests that temporally ambiguous objects are doubly penalised: they are poor sources of date information and poor recipients of temporal injection. Figure 7 reports per-object precision across all three inference modes using radar plots, for both object retrieval (top row) and date estimation (bottom row). In the object retrieval setting, the largest errors concentrate on categories that are visually sub-specific or easily confused with related classes: glasses, vehicle registration plates, and items of clothing such as socks and footwear tend to share visual features with broader categories, creating spuri-ous correlations that degrade categorical fidelity. For date estimation (bottom row), the La-bel+Label mode achieves strong and consistent performance across virtually all object cate-gories, confirming that the proxy-based subspace structure encodes temporal information re-liably when labels are directly available. However, when queries are issued through images, 26 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL Tire Shorts Glasses Human face Taxi ... Wheel Vehicle registration plate Dress Building Man 
+
+> 0.0 10.0 20.0 30.0
+> Average Year MAE
+
+... 
+
+> Reference Objects
+> Poster Girl Train House Dress ... Ladder Human face Tire Wheel Hat
+> 0.0 10.0 20.0 30.0
+> Average Year MAE
+
+... 
+
+> Target Objects
+
+Figure 6: Average Year Error decomposed by reference object (top) and target object (bot-tom) in the Image+Image inference mode. Reference objects with low error are reliable vessels for date injection, indicating clean category representations with low temporal entan-glement. Target objects with high error are temporally ambiguous, making them difficult to anchor to a specific period regardless of the source image used. performance degrades selectively for objects that lack distinctive temporal signatures, such as generic architectural elements or accessories, producing a marked and category-specific drop in precision. The temporal behaviour of each inference mode is further analysed in Figure 8. Date es-timation precision degrades toward earlier decades for both Image+Label and Image+Image modes, consistent with the sparser representation of pre-1950 material in the DEW dataset. Notably, the Image+Image mode exhibits a reversal of the general trend observed in label-based settings: whereas date precision typically exceeds object precision under Label+Label and Image+Label queries, the Image+Image mode yields stronger object than date precision. This suggests that the categorical subspace is more robust to temporal transplantation than the temporal subspace is to cross-image injection, a finding aligned with the theoretical guar-antee of Proposition 3, which ensures category preservation under orthogonal decomposition but imposes no analogous bound on the fidelity of the transplanted temporal signal. Figures 9 and 10 decompose the performance drop from Image+Label to Image+Image inference on a per-object basis, for date estimation and object retrieval respectively. Object retrieval degradation is more uniformly distributed across categories, suggesting that the category subspace remains largely stable under temporal transplantation for most classes, with isolated exceptions corresponding to categories with high inter-class visual overlap. A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 27 Window Tree Castle Tower Human face Bench Train Stairs Curtain Boat House Door Bus Ladder Street light Shirt Human head Dress Person Coat Shorts Skirt Building Poster Billboard Suit Hat Van Tie Girl Jeans Man Trousers Woman Boy Jacket Parking meter Car Taxi Traffic sign Wheel Tire Belt Glasses Traffic light Sock Footwear Watch Human ear Vehicle registration plate 
+
+0.25 0.50 0.75 1.00 
+
+Object P@K LABEL+LABEL Human face Tree Window Castle Curtain Tower Train Boat Human head House Door Bench Street light Shirt Dress Hat Stairs Bus Ladder Shorts Skirt Building Billboard Poster Coat Suit Van Jeans Person Tie Man Trousers Girl Car Woman Boy Jacket Parking meter Taxi Wheel Traffic sign Tire Watch Footwear Human ear Sock Traffic light Glasses Belt Vehicle registration plate 
+
+0.25 0.50 0.75 1.00 
+
+Object P@K IMAGE+LABEL Tree Human head Shirt Dress Human face Castle Tower Building House Train Car Bus Door Skirt Boat Bench Trousers Curtain Suit Stairs Window Jeans Poster Person Street light Coat Hat Ladder Billboard Woman Man Boy Tire Girl Jacket Shorts Tie Taxi Parking meter Van Wheel Traffic sign Watch Footwear Human ear Sock Traffic light Glasses Belt Vehicle registration plate 
+
+0.25 0.50 0.75 1.00 
+
+Object P@K IMAGE+IMAGE Tie Glasses Hat Watch Footwear Belt Wheel Human ear Traffic light Sock Tire Vehicle registration plate Shorts Boy Man Parking meter Girl Woman Jacket Trousers Stairs Bench Coat Castle Jeans Suit Traffic sign House Boat Human face Tree Human head Train Shirt Street light Window Building Door Ladder Dress Curtain Taxi Poster Tower Billboard Car Van Person Bus Skirt 
+
+0.25 0.50 0.75 1.00 
+
+Date P@K LABEL+LABEL Hat Human face Boy Man Tire Woman Wheel Girl Jacket Jeans Coat Bench Ladder Trousers Castle Suit Stairs Tie House Person Human head Boat Tree Street light Shirt Window Parking meter Door Building Dress Curtain Train Traffic sign Shorts Billboard Poster Tower Car VanSkirt Taxi Bus Watch Footwear Human ear Sock Traffic light Glasses Belt Vehicle registration plate 
+
+0.25 0.50 0.75 1.00 
+
+Date P@K IMAGE+LABEL Man Building Boy Tree Poster Woman House Skirt Dress Castle Train Suit Girl Tower Person Shirt Window Coat Trousers Bench Bus Human head Ladder Boat Car Curtain Human face Tire Jeans Stairs Door Jacket Taxi Parking meter Van Billboard Hat Street light Wheel Traffic sign Tie Shorts Watch Footwear Human ear Sock Traffic light Glasses Belt Vehicle registration plate 
+
+0.25 0.50 0.75 1.00 
+
+Date P@K IMAGE+IMAGE 
+
+Figure 7: Per-object precision radar plots for object retrieval (top row) and date estimation (bottom row) across Label+Label, Image+Label, and Image+Image inference modes (left to right). Object retrieval errors concentrate on visually sub-specific categories such as glasses, vehicle registration plates, and footwear, which share features across class boundaries. For date estimation, Label+Label achieves consistently strong performance, while image-based modes reveal a pronounced and category-dependent performance gap for temporally am-biguous objects. 0 2 4 6 8 10 12 
+
+Year index 
+
+10% 20% 30% 40% 50% 60% 70% 80% 
+
+> Date P@K
+
+Date P@K vs. Year 
+
+Image+Label Image+Image Label+Label Image+Label Image+Image 0% 20% 40% 60% 80% 100% 
+
+> Precision@K
+
+0.414 0.356 0.646 0.863 0.709 0.429 
+
+Headline Metrics 
+
+Object P@K Date P@K 
+
+Figure 8: Left: date estimation precision per source year across inference modes. Both Image+Label and Image+Image exhibit degraded performance for earlier decades, with Im-age+Label remaining more stable across the temporal range. Right: scalar summary of object and date precision per inference mode. In Image+Image retrieval, the relationship between object and date precision inverts relative to label-based modes, indicating that temporal in-jection is a stricter operation than category preservation under the learned decomposition. 28 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 0% 50% 100% Date P@K (mean over years) Hat Tie Wheel Shorts Human face Street light Tire Jacket Traffic sign Jeans 
+
+> 0.79
+> 0.77
+> 0.76
+> 0.74
+> 0.71
+> 0.70
+> 0.68
+> 0.68
+> 0.68
+> 0.67
+
+Label+Label cats 1 10 
+
+Label+Label Image+Label Image+Image 
+
+0% 50% 100% Date P@K (mean over years) Hat Tie Wheel Shorts Human face Street light Tire Jacket Traffic sign Jeans 
+
+> 0.79
+> 0.77
+> 0.76
+> 0.74
+> 0.71
+> 0.70
+> 0.68
+> 0.68
+> 0.68
+> 0.67
+
+Image+Label cats 1 10 
+
+Label+Label Image+Label Image+Image 
+
+0% 50% 100% Date P@K (mean over years) Hat Tie Wheel Shorts Human face Street light Tire Jacket Traffic sign Jeans 
+
+> 0.79
+> 0.77
+> 0.76
+> 0.74
+> 0.71
+> 0.70
+> 0.68
+> 0.68
+> 0.68
+> 0.67
+
+Image+Image cats 1 10 
+
+Label+Label Image+Label Image+Image 
+
+0% 50% 100% Date P@K (mean over years) Stairs Parking meter Billboard Ladder Door Bench Curtain Boat Human head Trousers 
+
+> 0.66
+> 0.64
+> 0.62
+> 0.61
+> 0.61
+> 0.59
+> 0.59
+> 0.59
+> 0.58
+> 0.58
+
+Label+Label cats 11 20 
+
+0% 50% 100% Date P@K (mean over years) Stairs Parking meter Billboard Ladder Door Bench Curtain Boat Human head Trousers 
+
+> 0.66
+> 0.64
+> 0.62
+> 0.61
+> 0.61
+> 0.59
+> 0.59
+> 0.59
+> 0.58
+> 0.58
+
+Image+Label cats 11 20 
+
+0% 50% 100% Date P@K (mean over years) Stairs Parking meter Billboard Ladder Door Bench Curtain Boat Human head Trousers 
+
+> 0.66
+> 0.64
+> 0.62
+> 0.61
+> 0.61
+> 0.59
+> 0.59
+> 0.59
+> 0.58
+> 0.58
+
+Image+Image cats 11 20 
+
+0% 50% 100% Date P@K (mean over years) Coat Van Taxi Girl Car Person Window Suit Shirt Castle 
+
+> 0.57
+> 0.56
+> 0.54
+> 0.53
+> 0.52
+> 0.51
+> 0.51
+> 0.50
+> 0.50
+> 0.49
+
+Label+Label cats 21 30 
+
+0% 50% 100% Date P@K (mean over years) Coat Van Taxi Girl Car Person Window Suit Shirt Castle 
+
+> 0.57
+> 0.56
+> 0.54
+> 0.53
+> 0.52
+> 0.51
+> 0.51
+> 0.50
+> 0.50
+> 0.49
+
+Image+Label cats 21 30 
+
+0% 50% 100% Date P@K (mean over years) Coat Van Taxi Girl Car Person Window Suit Shirt Castle 
+
+> 0.57
+> 0.56
+> 0.54
+> 0.53
+> 0.52
+> 0.51
+> 0.51
+> 0.50
+> 0.50
+> 0.49
+
+Image+Image cats 21 30 
+
+0% 50% 100% Date P@K (mean over years) Woman Boy Bus House Train Tower Dress Tree Man Building 
+
+> 0.48
+> 0.47
+> 0.46
+> 0.45
+> 0.44
+> 0.44
+> 0.42
+> 0.41
+> 0.39
+> 0.37
+
+Label+Label cats 31 40 
+
+0% 50% 100% Date P@K (mean over years) Woman Boy Bus House Train Tower Dress Tree Man Building 
+
+> 0.48
+> 0.47
+> 0.46
+> 0.45
+> 0.44
+> 0.44
+> 0.42
+> 0.41
+> 0.39
+> 0.37
+
+Image+Label cats 31 40 
+
+0% 50% 100% Date P@K (mean over years) Woman Boy Bus House Train Tower Dress Tree Man Building 
+
+> 0.48
+> 0.47
+> 0.46
+> 0.45
+> 0.44
+> 0.44
+> 0.42
+> 0.41
+> 0.39
+> 0.37
+
+Image+Image cats 31 40 
+
+0% 50% 100% Date P@K (mean over years) Poster Skirt Traffic light Watch Vehicle registration plate Sock Human ear Footwear Glasses Belt 
+
+> 0.36
+> 0.35
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+
+Label+Label cats 41 50 
+
+0% 50% 100% Date P@K (mean over years) Poster Skirt Traffic light Watch Vehicle registration plate Sock Human ear Footwear Glasses Belt 
+
+> 0.36
+> 0.35
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+
+Image+Label cats 41 50 
+
+0% 50% 100% Date P@K (mean over years) Poster Skirt Traffic light Watch Vehicle registration plate Sock Human ear Footwear Glasses Belt 
+
+> 0.36
+> 0.35
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+
+Image+Image cats 41 50 
+
+Figure 9: Per-object drop in date retrieval precision. A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 29 0% 50% 100% Object P@K Shorts Van Hat Ladder Street light Tie Parking meter Wheel Watch Traffic light 
+
+> 0.23
+> 0.19
+> 0.09
+> 0.07
+> 0.05
+> 0.04
+> 0.02
+> 0.00
+> 0.00
+> 0.00
+
+Label+Label cats 1 10 
+
+Label+Label Image+Label Image+Image 
+
+0% 50% 100% Object P@K Shorts Van Hat Ladder Street light Tie Parking meter Wheel Watch Traffic light 
+
+> 0.23
+> 0.19
+> 0.09
+> 0.07
+> 0.05
+> 0.04
+> 0.02
+> 0.00
+> 0.00
+> 0.00
+
+Image+Label cats 1 10 
+
+Label+Label Image+Label Image+Image 
+
+0% 50% 100% Object P@K Shorts Van Hat Ladder Street light Tie Parking meter Wheel Watch Traffic light 
+
+> 0.23
+> 0.19
+> 0.09
+> 0.07
+> 0.05
+> 0.04
+> 0.02
+> 0.00
+> 0.00
+> 0.00
+
+Image+Image cats 1 10 
+
+Label+Label Image+Label Image+Image 
+
+0% 50% 100% Object P@K Glasses Footwear Human ear Sock Vehicle registration plate Belt Billboard Traffic sign Window Taxi 
+
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> +0.00 +0.00 +0.02 +0.03
+
+Label+Label cats 11 20 
+
+0% 50% 100% Object P@K Glasses Footwear Human ear Sock Vehicle registration plate Belt Billboard Traffic sign Window Taxi 
+
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> +0.00 +0.00 +0.02 +0.03
+
+Image+Label cats 11 20 
+
+0% 50% 100% Object P@K Glasses Footwear Human ear Sock Vehicle registration plate Belt Billboard Traffic sign Window Taxi 
+
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> 0.00
+> +0.00 +0.00 +0.02 +0.03
+
+Image+Image cats 11 20 
+
+0% 50% 100% Object P@K Coat Human face Jacket Girl Curtain Man Boy Boat Bench Woman 
+
+> +0.04 +0.06 +0.07 +0.07 +0.12 +0.12 +0.15 +0.15 +0.16 +0.17
+
+Label+Label cats 21 30 
+
+0% 50% 100% Object P@K Coat Human face Jacket Girl Curtain Man Boy Boat Bench Woman 
+
+> +0.04 +0.06 +0.07 +0.07 +0.12 +0.12 +0.15 +0.15 +0.16 +0.17
+
+Image+Label cats 21 30 
+
+0% 50% 100% Object P@K Coat Human face Jacket Girl Curtain Man Boy Boat Bench Woman 
+
+> +0.04 +0.06 +0.07 +0.07 +0.12 +0.12 +0.15 +0.15 +0.16 +0.17
+
+Image+Image cats 21 30 
+
+0% 50% 100% Object P@K Train Door Castle Stairs Tree Tower Poster Person House Bus 
+
+> +0.18 +0.18 +0.19 +0.19 +0.19 +0.20 +0.20 +0.20 +0.22 +0.27
+
+Label+Label cats 31 40 
+
+0% 50% 100% Object P@K Train Door Castle Stairs Tree Tower Poster Person House Bus 
+
+> +0.18 +0.18 +0.19 +0.19 +0.19 +0.20 +0.20 +0.20 +0.22 +0.27
+
+Image+Label cats 31 40 
+
+0% 50% 100% Object P@K Train Door Castle Stairs Tree Tower Poster Person House Bus 
+
+> +0.18 +0.18 +0.19 +0.19 +0.19 +0.20 +0.20 +0.20 +0.22 +0.27
+
+Image+Image cats 31 40 
+
+0% 50% 100% Object P@K Skirt Tire Human head Shirt Suit Jeans Dress Building Trousers Car 
+
+> +0.27 +0.29 +0.30 +0.31 +0.32 +0.33 +0.33 +0.35 +0.45 +0.52
+
+Label+Label cats 41 50 
+
+0% 50% 100% Object P@K Skirt Tire Human head Shirt Suit Jeans Dress Building Trousers Car 
+
+> +0.27 +0.29 +0.30 +0.31 +0.32 +0.33 +0.33 +0.35 +0.45 +0.52
+
+Image+Label cats 41 50 
+
+0% 50% 100% Object P@K Skirt Tire Human head Shirt Suit Jeans Dress Building Trousers Car 
+
+> +0.27 +0.29 +0.30 +0.31 +0.32 +0.33 +0.33 +0.35 +0.45 +0.52
+
+Image+Image cats 41 50 
+
+Figure 10: Per-object drop in object retrieval precision. 30 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 
+
+## D CLIP Baseline 
+
+Both CLIP [27] baselines use OpenCLIP [11] ViT-B/32 [6] pre-trained on LAION-2B [30] as a frozen encoder, with no fine-tuning on DEW or on any historical imagery. All image embeddings are ℓ2-normalised to unit norm prior to any arithmetic operation or nearest-neighbour query, following the same convention as TDIR. A single Annoy index 4 of 
+
+Ntrees = 50 trees is built over the CLIP vision embeddings of the full training split (iden-tical images to those used for TDIR training), so that retrieval pool and gallery are exactly matched across methods. Nearest-neighbour search is performed in Euclidean space over the unit hypersphere, which is equivalent to cosine similarity for ℓ2-normalised vectors. The top-K = 10 neighbours are returned for every query, and precision is computed identically to Section 4.3. 
+
+D.1 CLIP Arithmetic Baseline 
+
+The arithmetic baseline replaces the learned proxy vectors μc and μy of TDIR with CLIP text embeddings, exploiting the joint vision–language alignment acquired during pre-training. For each object category c we encode the prompt "A photo of {c}" , and for each target year y
+
+(bucketed in 5-year lustrum bins from 1930 to 1999, yielding 14 bins) we encode "A photo in {year}" . All text embeddings are ℓ2-normalised after encoding, producing a category proxy matrix T c ∈ RC×d and a year proxy matrix T y ∈ RY ×d , with d = 512 for ViT-B/32. These matrices serve as drop-in substitutes for Pc and Py in all three inference modes of Section 3.5, with no modification to the retrieval procedure. 
+
+Label+Label. The query vector is the un-normalised sum q = T cc + T yy , directly mirroring the proxy-sum query q = μc + μy of TDIR. 
+
+Image+Label. The query is q = V (xc) + T yy , where V (xc) is the unit-norm CLIP vision embedding of the category image. 
+
+Image+Image (zero-label). The reference image xy is sampled uniformly from the train-ing index. Its inferred category ˆ c is obtained by argmax cosine similarity against all cate-gory text embeddings, ˆ c = arg max c′ V (xy)⊤T cc′ . The temporal residual is then extracted as 
+
+ry = V (xy) − T c 
+
+> ˆc
+
+, and the final query is q = V (xc) + ry.The poor date precision reported in Table 2 for this baseline is informative: despite CLIP embeddings carrying rankable temporal information [32], the arithmetic composition fails to disentangle temporal and categorical signals because CLIP was never trained to produce or-thogonal category and year subspaces. The residual ry retains substantial categorical content, and the year text prompts encode only a weak and diffuse notion of historical period that does not translate into a geometrically consistent displacement on the visual embedding manifold. This confirms that temporal composability is not an emergent property of vision–language pre-training, but requires the explicit geometric structure imposed by TDIR.   
+
+> 4https://github.com/spotify/annoy A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 31
+
+D.2 CLIP Prompting Baseline 
+
+The prompting baseline replaces vector arithmetic with a two-stage retrieve-and-rerank strat-egy. Rather than composing both signals into a single query vector, retrieval is first per-formed using the primary modality alone, and the resulting candidate pool is then re-ranked by cosine similarity to the secondary modality signal. This avoids relying on cross-modal vector addition and instead lets each signal operate independently on the unit hypersphere. Concretely, a candidate pool of size P = 100 is retrieved by Annoy nearest-neighbour search using the primary modality embedding. The stored embeddings of all pool candidates are then re-scored by their cosine similarity to the secondary modality embedding, and the top-K = 10 candidates after re-scoring are returned. 
+
+Label+Label. The candidate pool is retrieved by T cc alone; pool candidates are then re-ranked by cosine similarity to T yy .
+
+Image+Label. The candidate pool is retrieved by V (xc); re-ranking uses T yy . The pool is computed once per test image and reused for all 14 year bins, amortising the retrieval cost across the full label set. 
+
+Image+Image. The candidate pool is retrieved by V (xc); re-ranking uses V (xy) directly, re-placing the residual ry with the raw reference image embedding. This sidesteps the category-inference step and provides a stronger re-ranking signal when category and date co-vary in the reference image. As shown in Table 2, the prompting baseline recovers competitive object precision across all three modes, confirming that CLIP vision embeddings carry strong categorical signal. Date precision, however, remains substantially below TDIR for all inference modes even under reranking. This gap persists because reranking by T yy or V (xy) can only promote can-didates that already appear in the pool retrieved by the category signal, and nothing in the CLIP representation space guarantees that temporally relevant images rank highly under a category-only query. The contrast between the two baselines and TDIR thus isolates the con-tribution of the learned orthogonal decomposition: without it, object and temporal retrieval remain fundamentally entangled regardless of the composition strategy employed. 
+
+## E Frequently Asked Questions (FAQs) 
+
+In this section, readers will find a series of answers to questions raised during peer review, discussions, and others. We hope they cana be useful in interpreting the data and results presented in the paper, as well as the method itself. 
+
+E.1 Joint metric: Def. 1’s independence assumption holds empirically. 
+
+We added Precision@K requiring both category and date correct simultaneously to all three retrieval modes, letting us test directly (rather than assume) whether treating category and date as independent (Def. 1) actually holds at inference. On Label+Label (K=10, a stratified 7 407-crop pool): 
+
+Obj P@10 = 0.488 Date P@10 = 0.718 Joint P@10 = 0.349 32 A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 1930 1935 1940 1945 1950 1955 1960 1965 1970 1975 1980 1985 1990 1995 
+
+Window Bus Footwear  
+
+> -.05.02-.01.05 .04 .02 .02-.02-.05-.05-.02-.00.02 .07 -.02.00-.02.04 .05 .01 .03-.04-.08-.01-.03.00 .06 .04 .87 .75 .70 .56 .46 .17 .06-.22-.32-.21-.17-.18-.15-.15 0.5
+> 0.0 0.5
+> cos
+
+Figure 11: Category-year cosine similarity across all 14 year proxies for the two most or-thogonal ( Window , Bus ) and the most entangled ( Footwear ) of the 50 categories. against 0 .488 ×0.718 = 0.350 predicted under independence, a 0 .4% relative gap well within noise. Object- and date-correctness are therefore empirically independent: neither axis is traded off against, nor rides for free on, the other, exactly the behaviour Def. 1 and Thm. 1’s joint optimisation are designed to produce. 
+
+E.2 Proxy geometry corroborates this at the representation level. 
+
+We further computed the full cosine matrix between the 50 category and 14 year proxies of the reported ConvNeXt+TDIR checkpoint (its cached index reproduces Table 2/3 exactly). Cross-block mean | cos | = 0.204, close to the 0 .025 floor for random unit vectors in R1024 at this scale. Fig. 1 shows both regimes side by side across all 14 year proxies: 27/50 categories (e.g . Window , Bus ) sit at that floor throughout, genuinely orthogonal as Thm. 1 predicts in the exact case. A smaller set of ∼15 categories with a plausible intrinsic appearance-era link ( tie, belt, watch, sock, footwear,. . . ) shows the bounded, data-dependent residual δ that Prop. 2 anticipates for the realistic case: e.g . Footwear peaks at +0.87 in 1930 and is 3–6 × weaker by 1965 on. This residual tracks training-set size almost exactly (per-year mean | cos | vs. log sample count: r = −0.90, p<10 −4; 1930: 14k crops → 0.44; 1985: 108k crops → 0.11), giving δ a precise, measured, localized explanation rather than an abstract constant. 
+
+E.3 Baselines and Previous Work 
+
+Modern SSL pretraining (DINOv3). Because DINOv3 is not a specific architecture but a pretraining regime, we have loaded DINOv3 weights into the same ConvNeXt-Base back-bone used throughout (Table 2) and train under the identical 50-category protocol. At epoch 1 already, cross-block mean | cos | = 0.173, already at or below the fully-converged ImageNet-supervised value (0 .204), with the same ordinal decay replicating: the decompo-sition is therefore not an artifact of ImageNet-supervised pretraining. A. MOLINA ET AL .: COMPOSED HISTORICAL IMAGE RETRIEVAL 33 
+
+On the suggested [17, 22] baselines. We are well aware of both [17]’s smooth-nDCG loss needs a relevance function derived from a numerical variable: it can replace our proxy loss on the year component, but never on the category, so it does not serve as a composed-retrieval loss. However, further results may incorporate such loss as date proxy loss, but the method itself is not capable of composing concepts. And, on the other hand, [22] is incompatible with our setup by any means: it runs object detection over multi-object images and requires a dedicated encoder per object label to predict a date (in [22] the category is not learned, it is passed as input). 
+
+E.4 Ordinal structure & unseen years. 
+
+Cosine similarity between two year proxies decays smoothly with their temporal gap, al-though only pairwise transitivity (Def. 2) was ever enforced at training time: 5 10 15 20 25 30 35 40 45 50 55 60 65 
+
+> temporal gap between two year proxies (years)
+> 0.0 0.2
+> cos
+
+Leave-one-out check: a year’s true proxy is consistently closer to the midpoint of its two neighbours than to either neighbour alone ( e.g . cos = 0.66 vs. 0 .57 at 1935; all 12 interior years), so the subspace already extrapolates locally. 
+
+Objects with weak temporal signature. The categories with the lowest year-entanglement above ( window, bus, door, boat, tower ) are the slow-changing, architecture-type categories that one may flag as barely changing across decades. This is actually consistent, not contra-dictory, since their proxies correctly encode little date information because their appearance carries little.
