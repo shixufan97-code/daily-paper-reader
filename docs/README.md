@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-19 ~ 2026-08-28</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-29</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 27 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 2 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>14</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>13</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>2</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>0</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-28 01:46:06 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-29 02:01:02 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,10 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共生成 27 篇推荐（精读 14 篇，速读 13 篇）</p>
-<p>精读：《What Does Attention Transfer Transfer? Attention Structure and Robustness in Vision Transformers》（9.0/10）, 《CL4D: Contrastive Language-4D Pretraining for Vision-Language Reasoning in Dynamic Scenes》（9.0/10）</p>
-<p>速读：《Role-Conditioned Sub-Token Routing for Efficient Vision-Language-Action Policies》（8.0/10）, 《Vision-Language Models for Egocentric Video: From Hand-Object Interaction to Embodied AI》（8.0/10）, 《A Critical Synthesis of Uncertainty Quantification and Foundation Models for Semantic Segmentation》（8.0/10）</p>
-<p>这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。</p>
+<p>今日精读2篇，聚焦组合零样本学习与视觉语言模型的持续学习。最值得关注：扩散表示可提升组合泛化能力，任务特定子空间优化能缓解灾难性遗忘。下一步可尝试将扩散先验与参数高效微调结合，兼顾泛化与稳定性。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -74,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">14 篇</strong>
+    <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="What Does Attention Transfer Transfer? Attention Structure and Robustness in Vision Transformers">What Does Attention Transfer Transfer? Attention Structure and Robustness in Vision Transformers</span></li><li><span class="dpr-home-dashboard-paper-title" title="CL4D: Contrastive Language-4D Pretraining for Vision-Language Reasoning in Dynamic Scenes">CL4D: Contrastive Language-4D Pretraining for Vision-Language Reasoning in Dynamic Scenes</span></li><li><span class="dpr-home-dashboard-paper-title" title="EnSI-RAG: Entity-Structure-Indexed Retrieval-Augmented Generation for Long-Document Question Answering">EnSI-RAG: Entity-Structure-Indexed Retrieval-Augmented Generation for Long-Document Question Answering</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="DIFFCZSL: Compositional Zero-Shot Learning Regularized by Diffusion Representations">DIFFCZSL: Compositional Zero-Shot Learning Regularized by Diffusion Representations</span></li><li><span class="dpr-home-dashboard-paper-title" title="TASSO: TAsk-Specific Subspace Optimization for Continual Learning of Vision-Language Models">TASSO: TAsk-Specific Subspace Optimization for Continual Learning of Vision-Language Models</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">cv <strong>7</strong></span><span class="dpr-home-dashboard-tag">ai <strong>6</strong></span><span class="dpr-home-dashboard-tag">hsi-zsl <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">hsi-zsl <strong>2</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -87,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">13 篇</strong>
+    <strong class="dpr-home-dashboard-count">0 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Role-Conditioned Sub-Token Routing for Efficient Vision-Language-Action Policies">Role-Conditioned Sub-Token Routing for Efficient Vision-Language-Action Policies</span></li><li><span class="dpr-home-dashboard-paper-title" title="Vision-Language Models for Egocentric Video: From Hand-Object Interaction to Embodied AI">Vision-Language Models for Egocentric Video: From Hand-Object Interaction to Embodied AI</span></li><li><span class="dpr-home-dashboard-paper-title" title="A Critical Synthesis of Uncertainty Quantification and Foundation Models for Semantic Segmentation">A Critical Synthesis of Uncertainty Quantification and Foundation Models for Semantic Segmentation</span></li></ul>
+<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ai <strong>8</strong></span><span class="dpr-home-dashboard-tag">cv <strong>5</strong></span></div>
+
 </section>
 </div>
 

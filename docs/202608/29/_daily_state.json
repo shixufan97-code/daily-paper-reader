@@ -1,0 +1,41 @@
+{
+  "date": "20260829",
+  "date_label": "",
+  "generated_at": "2026-08-29 02:01:02 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.19871v1",
+      "route": "202608/29/2608.19871v1-diffczsl-compositional-zero-shot-learning-regularized-by-diffusion-representations",
+      "title": "DIFFCZSL: Compositional Zero-Shot Learning Regularized by Diffusion Representations",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "hsi-zsl"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "基于大视觉语言模型与扩散表示的零样本识别",
+      "first_seen_at": "2026-08-29 02:01:02 UTC",
+      "updated_at": "2026-08-29 02:01:02 UTC"
+    },
+    {
+      "paper_id": "2608.21487v1",
+      "route": "202608/29/2608.21487v1-tasso-task-specific-subspace-optimization-for-continual-learning-of-vision-language-models",
+      "title": "TASSO: TAsk-Specific Subspace Optimization for Continual Learning of Vision-Language Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "hsi-zsl"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向视觉语言模型持续学习与零样本保持的方法",
+      "first_seen_at": "2026-08-29 02:01:02 UTC",
+      "updated_at": "2026-08-29 02:01:02 UTC"
+    }
+  ]
+}
